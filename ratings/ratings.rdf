@@ -1,0 +1,422 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY ns2 "http://rdfs.org/sioc/ns#" >
+    <!ENTITY terms "http://purl.org/dc/terms/" >
+    <!ENTITY rev "http://purl.org/stuff/rev#" >
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY types "http://rdfs.org/sioc/types#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY ns "http://purl.org/net/ratings/ns#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://purl.org/net/ratings/ns#"
+     xml:base="http://purl.org/net/ratings/ns"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:ns2="http://rdfs.org/sioc/ns#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:rev="http://purl.org/stuff/rev#"
+     xmlns:ns="http://purl.org/net/ratings/ns#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:types="http://rdfs.org/sioc/types#">
+    <owl:Ontology rdf:about="http://purl.org/net/ratings/ns#">
+        <owl:versionInfo>0.1</owl:versionInfo>
+        <rdfs:comment>A set of extenssions for representing ratings in SIOC.</rdfs:comment>
+        <dc:title>SIOC Rating Module</dc:title>
+        <terms:creator>Gregoire Burel &lt;g.burel@open.ac.uk&gt;</terms:creator>
+        <owl:imports rdf:resource="http://purl.org/dc/terms/"/>
+        <owl:imports rdf:resource="http://purl.org/stuff/rev#"/>
+        <owl:imports rdf:resource="http://rdfs.org/sioc/ns#"/>
+        <owl:imports rdf:resource="http://rdfs.org/sioc/types#"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#has_measure -->
+
+    <owl:ObjectProperty rdf:about="&ns;has_measure">
+        <rdfs:range rdf:resource="&ns;Measure"/>
+        <rdfs:domain rdf:resource="&types;ReviewArea"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#has_measure_function -->
+
+    <owl:ObjectProperty rdf:about="&ns;has_measure_function">
+        <rdfs:domain rdf:resource="&ns;Measure"/>
+        <rdfs:range rdf:resource="&ns;MeasureFunction"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#has_review -->
+
+    <owl:ObjectProperty rdf:about="&ns;has_review">
+        <rdfs:range rdf:resource="&ns;Review"/>
+        <owl:inverseOf rdf:resource="&ns;review_of"/>
+        <rdfs:subPropertyOf rdf:resource="&ns2;container_of"/>
+        <rdfs:domain rdf:resource="&types;ReviewArea"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#has_review_area -->
+
+    <owl:ObjectProperty rdf:about="&ns;has_review_area">
+        <rdfs:domain rdf:resource="&ns2;Post"/>
+        <rdfs:range rdf:resource="&types;ReviewArea"/>
+        <rdfs:domain rdf:resource="&foaf;Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#has_reviewer -->
+
+    <owl:ObjectProperty rdf:about="&ns;has_reviewer">
+        <rdfs:domain rdf:resource="&ns;Review"/>
+        <owl:equivalentProperty rdf:resource="&rev;reviewer"/>
+        <rdfs:range rdf:resource="&foaf;Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#measure_function_of -->
+
+    <owl:ObjectProperty rdf:about="&ns;measure_function_of">
+        <rdfs:range rdf:resource="&ns;Measure"/>
+        <rdfs:domain rdf:resource="&ns;MeasureFunction"/>
+        <owl:inverseOf rdf:resource="&ns;has_measure_function"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#measure_of -->
+
+    <owl:ObjectProperty rdf:about="&ns;measure_of">
+        <rdfs:domain rdf:resource="&ns;Measure"/>
+        <owl:inverseOf rdf:resource="&ns;has_measure"/>
+        <rdfs:range rdf:resource="&types;ReviewArea"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#review_area_of -->
+
+    <owl:ObjectProperty rdf:about="&ns;review_area_of">
+        <owl:inverseOf rdf:resource="&ns;has_review_area"/>
+        <rdfs:range rdf:resource="&ns2;Post"/>
+        <rdfs:domain rdf:resource="&types;ReviewArea"/>
+        <rdfs:range rdf:resource="&foaf;Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#review_of -->
+
+    <owl:ObjectProperty rdf:about="&ns;review_of">
+        <rdfs:domain rdf:resource="&ns;Review"/>
+        <rdfs:subPropertyOf rdf:resource="&ns2;has_container"/>
+        <rdfs:range rdf:resource="&types;ReviewArea"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#reviewer_of -->
+
+    <owl:ObjectProperty rdf:about="&ns;reviewer_of">
+        <rdfs:range rdf:resource="&ns;Review"/>
+        <owl:inverseOf rdf:resource="&ns;has_reviewer"/>
+        <rdfs:domain rdf:resource="&foaf;Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/stuff/rev#reviewer -->
+
+    <rdf:Description rdf:about="&rev;reviewer"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/created -->
+
+    <rdf:Description rdf:about="&terms;created">
+        <rdfs:domain rdf:resource="&ns;Measure"/>
+        <rdfs:domain rdf:resource="&ns;Review"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <rdf:Description rdf:about="&terms;description">
+        <rdfs:domain rdf:resource="&ns;MeasureFunction"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#maxCardinality -->
+
+    <owl:DatatypeProperty rdf:about="&ns;maxCardinality">
+        <rdfs:domain rdf:resource="&ns;Review"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#minCardinality -->
+
+    <owl:DatatypeProperty rdf:about="&ns;minCardinality">
+        <rdfs:domain rdf:resource="&ns;Review"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#value -->
+
+    <owl:DatatypeProperty rdf:about="&ns;value">
+        <rdfs:domain rdf:resource="&ns;Measure"/>
+        <rdfs:domain rdf:resource="&ns;Review"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#Award -->
+
+    <owl:Class rdf:about="&ns;Award">
+        <rdfs:subClassOf rdf:resource="&ns;Review"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#AwardArea -->
+
+    <owl:Class rdf:about="&ns;AwardArea">
+        <rdfs:subClassOf rdf:resource="&types;ReviewArea"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#AwardMeasure -->
+
+    <owl:Class rdf:about="&ns;AwardMeasure">
+        <rdfs:subClassOf rdf:resource="&ns;Measure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#Like -->
+
+    <owl:Class rdf:about="&ns;Like">
+        <rdfs:subClassOf rdf:resource="&ns;Review"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#LikeMeasure -->
+
+    <owl:Class rdf:about="&ns;LikeMeasure">
+        <rdfs:subClassOf rdf:resource="&ns;Measure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#Mean -->
+
+    <owl:Class rdf:about="&ns;Mean">
+        <rdfs:subClassOf rdf:resource="&ns;MeasureFunction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#Measure -->
+
+    <owl:Class rdf:about="&ns;Measure"/>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#MeasureFunction -->
+
+    <owl:Class rdf:about="&ns;MeasureFunction"/>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#Median -->
+
+    <owl:Class rdf:about="&ns;Median">
+        <rdfs:subClassOf rdf:resource="&ns;MeasureFunction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#OwnerVote -->
+
+    <owl:Class rdf:about="&ns;OwnerVote">
+        <rdfs:subClassOf rdf:resource="&ns;Review"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#OwnerVoteMeasure -->
+
+    <owl:Class rdf:about="&ns;OwnerVoteMeasure">
+        <rdfs:subClassOf rdf:resource="&ns;Measure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#OwnerVotingArea -->
+
+    <owl:Class rdf:about="&ns;OwnerVotingArea">
+        <rdfs:subClassOf rdf:resource="&types;ReviewArea"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#Rating -->
+
+    <owl:Class rdf:about="&ns;Rating">
+        <rdfs:subClassOf rdf:resource="&ns;Review"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#RatingArea -->
+
+    <owl:Class rdf:about="&ns;RatingArea">
+        <rdfs:subClassOf rdf:resource="&types;ReviewArea"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#RatingMeasure -->
+
+    <owl:Class rdf:about="&ns;RatingMeasure">
+        <rdfs:subClassOf rdf:resource="&ns;Measure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#ReputationArea -->
+
+    <owl:Class rdf:about="&ns;ReputationArea">
+        <rdfs:subClassOf rdf:resource="&types;ReviewArea"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#Review -->
+
+    <owl:Class rdf:about="&ns;Review">
+        <owl:equivalentClass rdf:resource="&rev;Review"/>
+        <rdfs:subClassOf rdf:resource="&ns2;Item"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#Sum -->
+
+    <owl:Class rdf:about="&ns;Sum">
+        <rdfs:subClassOf rdf:resource="&ns;MeasureFunction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#Vote -->
+
+    <owl:Class rdf:about="&ns;Vote">
+        <rdfs:subClassOf rdf:resource="&ns;Review"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#VoteMeasure -->
+
+    <owl:Class rdf:about="&ns;VoteMeasure">
+        <rdfs:subClassOf rdf:resource="&ns;Measure"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/ratings/ns#VotingArea -->
+
+    <owl:Class rdf:about="&ns;VotingArea">
+        <rdfs:subClassOf rdf:resource="&types;ReviewArea"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/stuff/rev#Review -->
+
+    <rdf:Description rdf:about="&rev;Review"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.2.2.1789) http://owlapi.sourceforge.net -->
+

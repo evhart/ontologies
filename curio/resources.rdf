@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY curio2 "http://purl.org/net/curio/" >
+    <!ENTITY gml "http://www.opengis.net/gml/" >
+    <!ENTITY curio "http://purl.org/net/curio/ns#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY ns "http://purl.org/net/curio/resources#" >
+    <!ENTITY opo "http://ggg.milanstankovic.org/opo/ns#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="&curio2;resources#"
+     xml:base="&curio2;resources"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:gml="http://www.opengis.net/gml/"
+     xmlns:curio="&curio2;ns#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:ns="&curio2;resources#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:opo="http://ggg.milanstankovic.org/opo/ns#"
+     xmlns:curio2="http://purl.org/net/curio/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#">
+    <owl:Ontology rdf:about="">
+        <dc:title xml:lang="en"
+            >CURIO Resources Module</dc:title>
+        <rdfs:comment xml:lang="en"
+            >First version without OWL restrictions v0.2b</rdfs:comment>
+        <dc:creator xml:lang="en">Gregoire Burel</dc:creator>
+        <owl:imports rdf:resource="&curio2;ns"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&dc;creator"/>
+    <owl:AnnotationProperty rdf:about="&dc;title"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/net/curio/ns#has_localisation -->
+
+    <owl:ObjectProperty rdf:about="&curio2;ns#has_localisation">
+        <rdfs:domain rdf:resource="#Event"/>
+        <rdfs:range rdf:resource="&gml;_Geometry"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#is_participatingIn -->
+
+    <owl:ObjectProperty rdf:about="&curio2;ns#is_participatingIn">
+        <rdfs:domain rdf:resource="#Event"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#is_participationOf -->
+
+    <owl:ObjectProperty rdf:about="&curio2;ns#is_participationOf">
+        <rdfs:range rdf:resource="#Event"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/resources#has_document -->
+
+    <owl:ObjectProperty rdf:about="#has_document">
+        <rdfs:domain rdf:resource="#Event"/>
+        <rdfs:range rdf:resource="#EventItem"/>
+        <owl:inverseOf rdf:resource="#has_event"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/resources#has_event -->
+
+    <owl:ObjectProperty rdf:about="#has_event">
+        <rdfs:range rdf:resource="#Event"/>
+        <rdfs:domain rdf:resource="#EventItem"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/resources#has_subEvent -->
+
+    <owl:ObjectProperty rdf:about="#has_subEvent">
+        <rdfs:range rdf:resource="#Event"/>
+        <rdfs:domain rdf:resource="#Event"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/resources#is_subEventOf -->
+
+    <owl:ObjectProperty rdf:about="#is_subEventOf">
+        <rdfs:range rdf:resource="#Event"/>
+        <rdfs:domain rdf:resource="#Event"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://ggg.milanstankovic.org/opo/ns#startTime -->
+
+    <owl:DatatypeProperty rdf:about="&opo;startTime">
+        <rdfs:domain rdf:resource="#Event"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/resources#endTime -->
+
+    <owl:DatatypeProperty rdf:about="#endTime">
+        <rdfs:domain rdf:resource="#Event"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/resources#role -->
+
+    <owl:DatatypeProperty rdf:about="#role">
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Document -->
+
+    <owl:Class rdf:about="&curio2;ns#Document">
+        <owl:disjointWith rdf:resource="#EventItem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Item -->
+
+    <owl:Class rdf:about="&curio2;ns#Item"/>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#LocalisedItem -->
+
+    <owl:Class rdf:about="&curio2;ns#LocalisedItem"/>
+    
+
+
+    <!-- http://purl.org/net/curio/resources#Event -->
+
+    <owl:Class rdf:about="#Event">
+        <rdfs:subClassOf rdf:resource="&curio2;ns#LocalisedItem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/resources#EventItem -->
+
+    <owl:Class rdf:about="#EventItem">
+        <rdfs:subClassOf rdf:resource="&curio2;ns#Item"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.opengis.net/gml/_Geometry -->
+
+    <owl:Class rdf:about="&gml;_Geometry"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.974) http://owlapi.sourceforge.net -->
+

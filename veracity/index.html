@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:dct="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<head>
+<meta name="generator" content="HTML Tidy for Linux (vers 6 November 2007), see www.w3.org" />
+<title>Veracity Vocabulary Specification</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/xmlns-style.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://socsem.open.ac.uk/ontologies/veracity/veracity.rdf" rel="alternate" type="application/rdf+xml" />
+<script src="js/jqzoom/js/jquery-1.3.2.min.js" type="text/javascript">
+</script>
+<link rel="stylesheet" href="/css/master.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body.c5 {word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;}
+ img.c4 {padding: 15px;}
+ div.c3 {text-align: center;}
+ img.c2 {padding: 15px}
+ img.c1 {border: 0pt none; float: right; padding: 5px;}
+/*]]>*/
+</style>
+</head>
+<body class="c5">
+<h1>Veracity Vocabulary Specification v0.8<br /></h1>
+<h2>Modeling and Proving Trustworthiness of Web Resources - <em>WeKnowIt v2.0 Edition</em></h2>
+<dl>
+<dt>This version:</dt>
+<dd><a href="http://purl.org/net/veracity/ns">http://purl.org/net/veracity/ns</a> (<a href="http://socsem.open.ac.uk/ontologies/veracity/veracity.rdf">rdf</a>)</dd>
+<dd><br /></dd>
+<dt>Authors:</dt>
+<dd><a href="mailto:g.burel@open.ac.uk">Grégoire Burel</a><br />
+<a href="mailto:e.cano@dcs.shef.ac.uk">Amparo E. Cano</a><br />
+<a href="mailto:e.cano@dcs.shef.ac.uk">Matthew. Rowe</a><br />
+<a href="mailto:a.sosa@dcs.shef.ac.uk">Alfonso Sosa</a><br /></dd>
+</dl>
+<p class="copyright">Copyright © 2009-2012 Grégoire Burel</p>
+<div>
+<p><a href="http://validator.w3.org/check?uri=referer"><img class="c1" src="css/valid-xhtml-rdfa-blue.png" alt="Valid XHTML + RDFa" /></a> <!-- Creative Commons License -->
+ <a href="http://creativecommons.org/licenses/by/1.0/"><img alt="Creative Commons License" class="c1" src="css/somerights.gif" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/1.0/">Creative Commons Attribution License</a>. This copyright applies to the <em>Veracity Ontology Specification</em> and accompanying documentation in RDF. Regarding underlying technology, Veracity uses W3C's <a href="http://www.w3.org/RDF/">RDF</a> technology, an open Web standard that can be freely used by anyone.</p>
+<p>The <em>Veracity Ontology</em> has been developed within the <a href="http://oak.dcs.shef.ac.uk/">Organisations, Information and Knowledge (OAK) Group</a> at the <a href="http://www.shef.ac.uk/">University of Sheffield</a>. This project has received funding from the EU project <a href="http://www.weknowit.eu/">WeKnowIt</a> (ICT-215453).</p>
+<hr />
+<h2 id="sec-status">Abstract</h2>
+<p>The World Wide Web has evolved into a distributed network of interactive web applications facilitating the publication of information on a large scale. Judging whether such information can be trusted is a difficult task for humans, often leading to blind trust. The veracity ontology allows trust to be placed in web content by web users and agents. Moreover the approach differs from current work by allowing the trustworthiness of web content to be asserted through the provision of machine readable proofs (i.e. by citing another piece of information, or stating the credentials of the user/agent).</p>
+<p>This document contains a detailed description of the Veracity Ontology.</p>
+<div class="status">
+<h2>Status of This Document</h2>
+<p>Veracity has been initially developed for the <a href="http://www.weknowit.eu/">WeKnowIt project</a> as a mean for managing trust through personal intelligence. However, the ontology is generic enough for being used in a wide range of project were modeling trustworthiness is necessary. Veracity is an evolving work and not considered stable at the moment. The Veracity RDF namespace is fixed and its identifier is not expected to <a href="#sec-evolution">change</a>.</p>
+<p>The authors welcome comments on this document, preferably via emailing the main author since no mailing list exists at the moment <a href="mailto:g.burel@dcs.shef.ac.uk">g.burel@dcs.shef.ac.uk</a>;</p>
+<p>For more information, see the <a href="#sec-changes">changes</a> section for details of the changes in this version of the specification.</p>
+<h2 id="sec-toc">Table of Contents</h2>
+<ul>
+<li><a href="#sec-intro">Introduction</a></li>
+<li><a href="#sec-over">Overview</a></li>
+<li><a href="sec-example">Example</a></li>
+<li><a href="#sec-term">Terminology and notation</a></li>
+<li><a href="#sec-ack">Acknowledgments</a></li>
+<li><a href="#sec-pubs">Publications</a></li>
+<li><a href="#sec-refs">References</a></li>
+<li><a href="#sec-changes">Change Log</a></li>
+</ul>
+<h2 id="sec-intro">Introduction</h2>
+<p>As an open community the World Wide Web has facilitated the contribution and sharing of ideas spanning a large information network. The visibility of this information brings along the problem of what to trust and whom to trust. So far it is up to web users to make a conscious decision whether to believe what they are reading or not.</p>
+<p>Contrary to previous approaches, the Veracity Ontology enable the assertion of proof behind a trust decision. Particularly, it introduces three different trust models that can work together such has a basic TrustworthinesAssertion, a AgentKnowledgeProofAssertion and a DirectKnowledgeProofAssertion.</p>
+<div style="width:425px" id="__ss_5424438"><object id="__sse5424438" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=veracity-presentation-final-101012095125-phpapp01&rel=0&stripped_title=representing-proving-and-sharing-trustworthiness-of-web-resources-using-veracity&userName=ampaeli" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse5424438" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=veracity-presentation-final-101012095125-phpapp01&rel=0&stripped_title=representing-proving-and-sharing-trustworthiness-of-web-resources-using-veracity&userName=ampaeli" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object></div>
+
+<h2 id="sec-over">Overview</h2>
+<p>The following diagram gives a general overview of the Veracity Ontology.</p>
+<p>You can consult the <a href="#sec-pubs">EKAW2010 publication</a> or the <a href="http://www.dcs.shef.ac.uk/~gregoire/ontologies/veracity/veracity.rdf">RDF</a> for more information.</p>
+
+<div class="c3"><img src='css/ontology-slim.png' class='c2' alt='Veracity' style=" float: left;"/></div>
+
+<p class="editorial" style="clear: both;">This documentation is work in progress. Please refers to the RDF file directly for more information.</p>
+<h3 id="sec-example">Example</h3>
+<p>Here is a very basic description of a DirectKnowledgeProofAssertion:</p>
+<div class="example">
+<pre>
+@prefix vo: &lt;http://purl.org/veracity/ns#&gt; .
+&lt;http://example.com/Albert Einstein#physics&gt; a vo:Proposition .
+&lt;http://example.com/Albert Einstein#physics&gt; vo:has_trustworthiness :bnode1 .
+:bnode1 a vo:Trustworthiness .
+:bnode1 vo:trusted "true"∧∧ xsd.boolean.
+:bnode1 vo:has_proof :bnode2 .
+:bnode2 a vo:DirectKnowledgeProofAssertion .
+:bnode2 vo:has_proof &lt;http://dbpedia.org/resource/Albert Einstein&gt; .
+</pre></div>
+<p>This example, defines a small direct knowledge proof assertion. The proposition that Albert Einstein is a physicist is prooved by referencing a DBPedia resource.</p>
+<h3 id="sec-term">Terminology and notation</h3>
+<p>The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="#ref-rfc2119">RFC 2119</a>.</p>
+<p>Namespace URIs of the general form "http://www.example.com/" represent some application-dependent or context-dependent URI as defined in <a href="#ref-rfc2396">RFC 2396</a>.</p>
+<p>The XML Namespace URIs that MUST be used by implementations of this specification are:</p>
+<ul>
+<li><a href="http://purl.org/net/veracity/ns#">http://purl.org/net/veracity/ns#</a> - Veracity Ontology Namespace</li>
+</ul>
+<a id="sec-glance"></a>
+<h2 id="sec-ack">Acknowledgments</h2>
+<p>The <em>Veracity Ontology</em> has been developed within the <a href="http://oak.dcs.shef.ac.uk/">Organisations, Information and Knowledge (OAK) Group</a> at the <a href="http://www.shef.ac.uk/">University of Sheffield</a>. This project has received funding from the EU project <a href="http://www.weknowit.eu/">WeKnowIt</a> (ICT-215453).</p>
+<p>The style of the documentation is largely based on the documentation layout of <a href="http://rdfs.org/sioc/spec/">SIOC</a> and <a href="http://xmlns.com/foaf/spec/">FOAF</a>.</p>
+<div class="c3"><a href="http://www.shef.ac.uk/"><img src="css/uni.gif" alt="University Of Sheffield" /></a> <a href="http://oak.dcs.shef.ac.uk/"><img class="c4" src="css/oak.png" alt="OAK Group" /></a> <a href="http://www.weknowit.eu/"><img src="css/wki.png" alt="WeKnowIt" /></a></div>
+
+<h2 id="sec-pubs">Publications</h2>
+<ul>
+<li><a href="http://evhart.online.fr/publications/gbureletal-ekaw2010-veracity.pdf">Representing, Proving and Sharing Trustworthiness of Web Resources Using Veracity</a>. G Burel, A E Cano, M Rowe and A Sosa. In proceedings of EKAW 2010. Lisbon, Portugal. (2010)</li>
+<li><a href="http://www.slideshare.net/evhart/veracity-eswc2010-poster">Modeling and Proving Trustworthiness of Web Resources using Veracity</a>. G Burel, A E Cano, M Rowe and A Sosa. In poster track of ESWC 2010. Heraklion, Crete. (2010)</li>
+</ul>
+<h2 id="sec-refs">References</h2>
+<ul>
+<li><a id="ref-rfc2119"></a>[RFC 2119] S. Bradner, "Key words for use in RFCs to Indicate Requirement Levels", RFC 2119, Harvard University, March 1997, <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.</li>
+<li><a id="ref-rfc2396"></a>[RFC 2396] T. Berners-Lee et al., "Uniform Resource Identifiers (URI): Generic Syntax", RFC 2396, Internet Engineering Task Force, August 1998, <a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>.</li>
+</ul>
+<h2 id="sec-changes">Change log</h2>
+<h3 id="sec-changes20100315">2010-03-15 (0.8)</h3>
+<ul>
+<li>Publication of the Ontology.</li>
+</ul>
+<div id="extra-div1"></div>
+</div>
+</div>
+</body>
+</html>

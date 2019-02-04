@@ -1,0 +1,482 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY wot "http://xmlns.com/wot/0.1/" >
+    <!ENTITY terms "http://purl.org/dc/terms/" >
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY veracity "http://purl.org/net/veracity/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY ns "http://purl.org/net/veracity/ns#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY ns2 "http://www.w3.org/2003/06/sw-vocab-status/ns#" >
+]>
+
+
+<rdf:RDF xmlns="&veracity;ns#"
+     xml:base="&veracity;ns"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:veracity="http://purl.org/net/veracity/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:wot="http://xmlns.com/wot/0.1/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:ns="&veracity;ns#"
+     xmlns:ns2="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="">
+        <owl:versionInfo xml:lang="en">0.8</owl:versionInfo>
+        <dc:creator>Gregoire Burel</dc:creator>
+        <dc:description xml:lang="en"
+            >Modeling and Proving Trustworthiness of Web Resources</dc:description>
+        <dc:title xml:lang="en"
+            >Veracity Ontology</dc:title>
+        <owl:imports rdf:resource="http://www.w3.org/2003/06/sw-vocab-status/ns"/>
+        <owl:imports rdf:resource="http://xmlns.com/foaf/0.1/"/>
+        <owl:imports rdf:resource="http://xmlns.com/wot/0.1/"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&dc;description"/>
+    <owl:AnnotationProperty rdf:about="&ns2;term_status"/>
+    <owl:AnnotationProperty rdf:about="&dc;creator"/>
+    <owl:AnnotationProperty rdf:about="&dc;title"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/net/veracity/has_created -->
+
+    <owl:ObjectProperty rdf:about="&veracity;has_created">
+        <rdfs:label xml:lang="en">has_created</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:comment xml:lang="en"
+            >The proposition created by an Agent.</rdfs:comment>
+        <rdfs:range rdf:resource="&veracity;Proposition"/>
+        <rdfs:domain rdf:resource="&foaf;Agent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/has_creator -->
+
+    <owl:ObjectProperty rdf:about="&veracity;has_creator">
+        <rdfs:label xml:lang="en">has_creator</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <rdfs:comment xml:lang="en"
+            >The agent that created a proposition.</rdfs:comment>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:domain rdf:resource="&veracity;Proposition"/>
+        <owl:inverseOf rdf:resource="&veracity;has_created"/>
+        <rdfs:range rdf:resource="&foaf;Agent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/ns#has_knowledgeProof -->
+
+    <owl:ObjectProperty rdf:about="#has_knowledgeProof">
+        <rdfs:label xml:lang="en"
+            >has_knowledgeProof</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <rdfs:comment xml:lang="en"
+            >The KnowledgeProof that backup an AgentKnowledgeProof.</rdfs:comment>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:domain rdf:resource="&veracity;AgentKnowledgeProofAssertion"/>
+        <rdfs:range rdf:resource="&veracity;KnowledgeProof"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/ns#has_proof -->
+
+    <owl:ObjectProperty rdf:about="#has_proof">
+        <rdfs:label xml:lang="en">has_proof</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <rdfs:comment xml:lang="en"
+            >The proof of a Trustworthiness.</rdfs:comment>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:range rdf:resource="&veracity;AgentKnowledgeProofAssertion"/>
+        <rdfs:domain rdf:resource="&veracity;TrustworthinessAssertion"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/ns#has_trustworthiness -->
+
+    <owl:ObjectProperty rdf:about="#has_trustworthiness">
+        <rdfs:label xml:lang="en"
+            >has_trustworthiness</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:comment xml:lang="en"
+            >The Trustworthiness of a Proposition.</rdfs:comment>
+        <rdfs:domain rdf:resource="&veracity;Proposition"/>
+        <rdfs:range rdf:resource="&veracity;Trustworthiness"/>
+        <owl:inverseOf rdf:resource="#is_trustworthinessOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/ns#is_assertedBy -->
+
+    <owl:ObjectProperty rdf:about="#is_assertedBy">
+        <rdfs:label xml:lang="en">is_assertedBy</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:comment xml:lang="en"
+            >The TrustworthinessAssertion associated with a Trustworthiness.</rdfs:comment>
+        <rdfs:domain rdf:resource="&veracity;Trustworthiness"/>
+        <rdfs:range rdf:resource="&veracity;TrustworthinessAssertion"/>
+        <owl:inverseOf rdf:resource="#is_asserting"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/ns#is_asserting -->
+
+    <owl:ObjectProperty rdf:about="#is_asserting">
+        <rdfs:label xml:lang="en">is_assering</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:comment xml:lang="en"
+            >The Trustworthiness associated with a TrustworthinessAssertion.</rdfs:comment>
+        <rdfs:range rdf:resource="&veracity;Trustworthiness"/>
+        <rdfs:domain rdf:resource="&veracity;TrustworthinessAssertion"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/ns#is_knowledgeProofOf -->
+
+    <owl:ObjectProperty rdf:about="#is_knowledgeProofOf">
+        <rdfs:label xml:lang="en"
+            >is_knowledgeProofOf</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <rdfs:comment xml:lang="en"
+            >The AgentKnowledgeProof associated with a KnowledgeProof.</rdfs:comment>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:range rdf:resource="&veracity;AgentKnowledgeProofAssertion"/>
+        <rdfs:domain rdf:resource="&veracity;KnowledgeProof"/>
+        <owl:inverseOf rdf:resource="#has_knowledgeProof"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/ns#is_proofOf -->
+
+    <owl:ObjectProperty rdf:about="#is_proofOf">
+        <rdfs:label xml:lang="en">is_proofOf</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <rdfs:comment xml:lang="en"
+            >The Thrustworthiness proved by an AgentKnwoledgeProofAssertion.</rdfs:comment>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:domain rdf:resource="&veracity;AgentKnowledgeProofAssertion"/>
+        <rdfs:range rdf:resource="&veracity;TrustworthinessAssertion"/>
+        <owl:inverseOf rdf:resource="#has_proof"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/ns#is_trustworthinessOf -->
+
+    <owl:ObjectProperty rdf:about="#is_trustworthinessOf">
+        <rdfs:label xml:lang="en"
+            >is_trustworthinessOf</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <rdfs:comment xml:lang="en"
+            >The Proposition associated with a Trustworthiness.</rdfs:comment>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:range rdf:resource="&veracity;Proposition"/>
+        <rdfs:domain rdf:resource="&veracity;Trustworthiness"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/net/veracity/checksum -->
+
+    <owl:DatatypeProperty rdf:about="&veracity;checksum">
+        <rdfs:label xml:lang="en"
+            >The SHA1 Sum of a given Proposition.</rdfs:label>
+        <rdfs:label xml:lang="en">checksum</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <ns2:term_status>testing</ns2:term_status>
+        <rdfs:domain rdf:resource="&veracity;Proposition"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/confidence -->
+
+    <owl:DatatypeProperty rdf:about="&veracity;confidence">
+        <rdfs:label xml:lang="en">confidence</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <ns2:term_status>testing</ns2:term_status>
+        <ns2:term_status xml:lang="en"
+            >A decimal Number between 0 and 1 included defining the level of confidence of a TrustworthinessAssertion.</ns2:term_status>
+        <rdfs:domain rdf:resource="&veracity;TrustworthinessAssertion"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/ns#signature -->
+
+    <owl:DatatypeProperty rdf:about="#signature">
+        <rdfs:label xml:lang="en">signature</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <rdfs:comment xml:lang="en"
+            >A digital signature of a given SignedAssertion.</rdfs:comment>
+        <ns2:term_status>stable</ns2:term_status>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/participation -->
+
+    <owl:DatatypeProperty rdf:about="&veracity;participation">
+        <rdfs:label xml:lang="en">participation</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <ns2:term_status>testing</ns2:term_status>
+        <ns2:term_status xml:lang="en"
+            >A decimal Number between 0 and 1 included defining the level of confidence of KnowledgeProofAssertion.</ns2:term_status>
+        <rdfs:domain rdf:resource="&veracity;KnowledgeProofAssertion"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/topic -->
+
+    <owl:DatatypeProperty rdf:about="&veracity;topic">
+        <rdfs:label xml:lang="en">topic</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <ns2:term_status xml:lang="en"
+            >The topic of a Proposition.</ns2:term_status>
+        <ns2:term_status>testing</ns2:term_status>
+        <rdfs:domain rdf:resource="&veracity;Proposition"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/veracity/trusted -->
+
+    <owl:DatatypeProperty rdf:about="&veracity;trusted">
+        <rdfs:label xml:lang="en">trusted</rdfs:label>
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI"
+            >http://purl.org/net/veracity/ns</rdfs:isDefinedBy>
+        <ns2:term_status xml:lang="en"
+            >A boolean defining if a Proposition tends to be trusted or not.</ns2:term_status>
+        <ns2:term_status>testing</ns2:term_status>
+        <rdfs:domain rdf:resource="&veracity;Trustworthiness"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/Agent -->
+
+    <owl:Class rdf:about="&terms;Agent"/>
+    
+
+
+    <!-- http://purl.org/net/veracity/AgentKnowledgeProofAssertion -->
+
+    <owl:Class rdf:about="&veracity;AgentKnowledgeProofAssertion">
+        <rdfs:label xml:lang="en"
+            >AgentKnowledgeProofAssertion</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&veracity;KnowledgeProofAssertion"/>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:comment xml:lang="en"
+            >This kind of assertion enables an entity to justify the personal knowledge used by a particular foaf:Agent. Typically, foaf:Agent that performs a TrustworthinessAssertion may partially justify his decision by using a proof of his knowledge through the use of the has proof property of an  TrustworthinessAssertion.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/veracity/DirectKnowledgeProofAssertion -->
+
+    <owl:Class rdf:about="&veracity;DirectKnowledgeProofAssertion">
+        <rdfs:label xml:lang="en"
+            >DirectKnowledgeProofAssertion</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&veracity;KnowledgeProofAssertion"/>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:comment xml:lang="en"
+            >A DirectKnowledgeProofAssertion enables an agent to cite a resource that tends to validate or invalidate a Proposition</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/veracity/KnowledgeProof -->
+
+    <owl:Class rdf:about="&veracity;KnowledgeProof">
+        <rdfs:label xml:lang="en">KnowledgeProof
+</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&veracity;Proposition"/>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:comment xml:lang="en"
+            >A proposition that can be refered as a proof of a trustworthiness.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/veracity/KnowledgeProofAssertion -->
+
+    <owl:Class rdf:about="&veracity;KnowledgeProofAssertion">
+        <rdfs:label xml:lang="en"
+            >KnowledgeProofAssertion</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&veracity;SignedAssertion"/>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:comment xml:lang="en"
+            >See AgentKnowledgeProofAssertion and DirectKnowledgeProofAssertion</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/veracity/Proposition -->
+
+    <owl:Class rdf:about="&veracity;Proposition">
+        <rdfs:label xml:lang="en">proposition</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <owl:disjointWith rdf:resource="&foaf;Agent"/>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:comment xml:lang="en"
+            >A proposition can be any piece of web content which is identi&#64257;ed by a URI - akin to a resource or statement via rei&#64257;cation in Semantic Web terms. Therefore the granularity of a proposition can range from a single statement through to an entire web page.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/veracity/SignedAssertion -->
+
+    <owl:Class rdf:about="&veracity;SignedAssertion">
+        <rdfs:label xml:lang="en">SignedAssertion</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&veracity;Proposition"/>
+        <rdfs:comment xml:lang="en"
+            >A signed assertion defines a proposition that is signed with an cryptographic key.</rdfs:comment>
+        <ns2:term_status>testing</ns2:term_status>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/veracity/Trustworthiness -->
+
+    <owl:Class rdf:about="&veracity;Trustworthiness">
+        <rdfs:label xml:lang="en">Trustworthiness</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&veracity;Proposition"/>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:comment xml:lang="en"
+            >In order to model the trustworthiness associated to a Proposition we must be able to assert a value which denotes an entity as trustworthy or not.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/veracity/TrustworthinessAssertion -->
+
+    <owl:Class rdf:about="&veracity;TrustworthinessAssertion">
+        <rdfs:label xml:lang="en"
+            >TrustworthinessAssertion</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&veracity;SignedAssertion"/>
+        <ns2:term_status>stable</ns2:term_status>
+        <rdfs:comment xml:lang="en"
+            >This class of assertion manages a simple type of 
+trustworthiness assertion that only relies on social information.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Agent -->
+
+    <owl:Class rdf:about="&foaf;Agent"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://xmlns.com/wot/0.1/User -->
+
+    <terms:Agent rdf:about="&wot;User"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.974) http://owlapi.sourceforge.net -->
+

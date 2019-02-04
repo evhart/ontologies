@@ -1,0 +1,959 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:foaf="http://xmlns.com/foaf/0.1/"
+xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+xmlns:owl="http://www.w3.org/2002/07/owl#"
+xmlns:dct="http://purl.org/dc/terms/"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+<head>
+<title>CURIO Core Vocabulary Specification</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/xmlns-style.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://www.dcs.shef.ac.uk/~gregoire/ontologies/curio/curio.rdf" rel="alternate" type="application/rdf+xml" />
+<script src="js/jqzoom/js/jquery-1.3.2.min.js" type="text/javascript">
+</script>
+<script src="js/jqzoom/js/jqzoom.pack.1.0.1.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+//<![CDATA[
+
+                $(document).ready(function(){
+                var options = {
+                        zoomWidth: 400,
+                        zoomHeight: 350,
+                                xOffset: 10,
+                                yOffset: 0,
+                                position: "left",
+                                title: "false"
+                };
+
+                $('.jqzoom').jqzoom(options);
+                });
+
+                //]]>
+</script>
+<link rel="stylesheet" href="/css/master.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body.c10 {word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;}
+ div.c9 {text-align: center;}
+ img.c8 {padding: 15px;}
+ div.c7 {float: left; padding-left: 15px; width: 370px;}
+ div.c6 {float: left; position: relative;}
+ div.c5 {visibility: hidden;}
+ a.c4 {outline-style: none; text-decoration: none; cursor: crosshair; position: relative; display: block; height: 486px; width: 450px;}
+ img.c3 {border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-top-color: rgb(143, 113, 53); border-right-color: rgb(143, 113, 53); border-bottom-color: rgb(143, 113, 53); border-left-color: rgb(143, 113, 53); float: left; position: absolute; top: 0px; left: 0px;}
+ div.c2 {clear: left;}
+ img.c1 {border: 0pt none; float: right; padding: 5px;}
+/*]]>*/
+</style>
+</head>
+<body class="c10">
+<h1>CURIO Core Vocabulary Specification v0.5<br /></h1>
+<h2>Collaborative User Resource Interaction Ontology - <em>wgs84 Edition</em></h2>
+<dl>
+<dt>This version:</dt>
+<dd><a href="http://purl.org/net/curio/ns">http://purl.org/net/curio/</a> (<a href="http://people.kmi.open.ac.uk/burel/ontologies/curio/curio.rdf">rdf</a>)</dd>
+<dd><br /></dd>
+<dt>Author:</dt>
+<dd><a href="mailto:g.burel@open.ac.uk">Grégoire Burel</a></dd>
+</dl>
+<p class="copyright">Copyright © 2009-2011 Grégoire Burel</p>
+<div>
+<p><a href="http://validator.w3.org/check?uri=referer"><img class="c1" src="css/valid-xhtml-rdfa-blue.png" alt="Valid XHTML + RDFa" /></a> <!-- Creative Commons License -->
+ <a href="http://creativecommons.org/licenses/by/1.0/"><img alt="Creative Commons License" class="c1" src="css/somerights.gif" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/1.0/">Creative Commons Attribution License</a>. This copyright applies to the <em>CURIO Vocabulary Specification</em> and accompanying documentation in RDF. Regarding underlying technology, CURIO uses W3C's <a href="http://www.w3.org/RDF/">RDF</a> technology, an open Web standard that can be freely used by anyone.</p>
+<p>The <em>CURIO Vocabulary</em> is being developed within the <a href="http://oak.dcs.shef.ac.uk/">Organisations, Information and Knowledge (OAK) Group</a> at the <a href="http://www.shef.ac.uk/">University of Sheffield</a>. This project has received funding from the EU project <a href="http://www.weknowit.eu/">WeKnowIt</a> (ICT-215453).</p>
+<hr />
+<h2 id="sec-status">Abstract</h2>
+<p>This specification describes the CURIO language, defined as a dictionary of named properties and classes using W3C's RDF/OWL technology.</p>
+<p>The CURIO Vocabulary is a general purpose ontology designed for managing the collaborative discussion of user generated resources in a unified and collaborative fashion. Despite being developed in the context of the <a href="http://www.weknowit.eu/">WeKnowIt project</a>, the vocabulary can be easily adapted for a particular need thanks to its flexible resource model.</p>
+<p>CURIO can be considered as an <em>aggregative</em> ontology since it aggregates and connect many concept from different standard ontology in a formalised way. This vocabulary reuse most of its concept from the <a href="http://rdfs.org/sioc/spec/">SIOC vocabulary</a> but incorporate many classes and properties from other ontology such as <a href="http://dublincore.org/documents/dcmi-terms/">DCTerms</a>, <a href="http://www.w3.org/2005/Incubator/geo/XGR-geo-20071023/">GeoOWL</a>, <a href="http://www.commontag.org/Specification">CommonTag</a> and <a href="http://www.milanstankovic.org/opo/ontology.html">OPO</a>. The ontology is based around the concept of <em>Resource</em>. A <em>Resource</em> is a specific class that holds a user generated content. Currently different class exists. Particularly, the <em>Document</em> and <em>Event</em> classes enables the combination of virtual events with a real one.</p>
+<p>This document contains a detailed description of the CURIO Core Ontology and its standard modules.</p>
+<div class="status">
+<h2>Status of This Document</h2>
+<p>CURIO has been initially developed for the <a href="http://www.weknowit.eu/">WeKnowIt project</a> as a mean for connecting the different level of intelligence found within the project. However, the ontology is generic enough for being used in a wide range of project were modeling collective intelligence is necessary. CURIO is an evolving work and not considered stable at the moment. The CURIO RDF namespace is fixed and its identifier is not expected to <a href="#sec-evolution">change</a>.</p>
+<p>The authors welcome comments on this document, preferably via emailing the main author since no mailing list exists at the moment <a href="mailto:g.burel@open.ac.uk">g.burel@open.ac.uk</a>;</p>
+<p>For more information, see the <a href="#sec-changes">changes</a> section for details of the changes in this version of the specification.</p>
+<h2 id="sec-toc">Table of Contents</h2>
+<ul>
+<li><a href="#sec-intro">Introduction</a></li>
+<li><a href="#sec-term">Terminology and notation</a></li>
+<li><a href="sec-glance">CURIO at a glance</a></li>
+<li><a href="#sec-glance">CURIO at a glance</a></li>
+<li><a href="#sec-example">Example</a></li>
+<li><a href="#sec-bg">Background</a></li>
+<li><a href="#sec-desc">The CURIO Vocabulary description</a></li>
+<li><a href="#sec-evolution">Evolution and Extension of CURIO</a></li>
+<li><a href="#sec-standards">CURIO and Standards</a></li>
+<li><a href="#sec-crossref">CURIO cross-reference: Listing CURIO Classes and Properties</a></li>
+<li><a href="#sec-ack">Acknowledgments</a></li>
+<li><a href="#sec-refs">References</a></li>
+<li><a href="#sec-changes">Change Log</a></li>
+</ul>
+<h2 id="sec-intro">Introduction</h2>
+<p>Collaborative platforms are emerging as a new mean for managing user generated content in order to generate a collective knowledge that can be reused among communities. This generated content produced by the interaction of many user at the same time needs a common format in order to connect all this content together. The effort of creating a common understanding of an online community has been addressed by the <a href="http://rdfs.org/sioc/spec/">SIOC community</a>. However, a common model of the information shared within these communities remains informal.</p>
+<p>The Collaborative User Resource Interaction Ontology, or CURIO, is a set of modules that provides a common understanding of resources shared between users on a common platform. The modules model different standard object such as pictures or events according to a community perspective. This perspective requires a formal representation of the generals features found in such type of community such as comments, tags, title, localisation.</p>
+<p>The CURIO Vocabulary described in this document create common understanding of the entities manipulated by a community of users. Developers can use this ontology to express the information generated by their user in a formal way for a better exposition of their information. CURIO is not a substitute to SIOC. Instead, CURIO is a set of common practices for defining the structured information available on a social platform. CURIO sits on the top of SIOC and enable a more formal definition of the information encountered on community websites.</p>
+<h3 id="sec-term">Terminology and notation</h3>
+<p>The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="#ref-rfc2119">RFC 2119</a>.</p>
+<p>Namespace URIs of the general form "http://www.example.com/" represent some application-dependent or context-dependent URI as defined in <a href="#ref-rfc2396">RFC 2396</a>.</p>
+<p>The XML Namespace URIs that MUST be used by implementations of this specification are:</p>
+<ul>
+<li><a href="http://purl.org/net/curio/ns#">http://purl.org/net/curio/ns#</a> - CURIO Core Vocabulary Namespace</li>
+<li><a href="http://purl.org/net/curio/annotations#">http://purl.org/net/curio/annotations#</a> - CURIO Annotations Vocabulary Namespace</li>
+<li><a href="http://purl.org/net/curio/documents#">http://purl.org/net/curio/documents#</a> - CURIO Documents Vocabulary Namespace</li>
+<li><a href="http://purl.org/net/curio/resources#">http://purl.org/net/curio/resources#</a> - CURIO General Resources Vocabulary Namespace</li>
+</ul>
+<a id="sec-glance"></a>
+<h2 id="glance">CURIO at a glance</h2>
+<p>An a-z index of CURIO terms, by class (categories or types) and by property.</p>
+<div class="azlist">
+<p>Classes: | <a href="#term_Agent">Agent</a> | <a href="#term_AnnotationArea">AnnotationArea</a> | <a href="#term_Audio">Audio</a> | <a href="#term_AuthorTag">AuthorTag</a> | <a href="#term_SemanticTag">AutoTag</a> | <a href="#term_Container">Container</a> | <a href="#term_Document">Document</a> | <a href="#term_Event">Event</a> | <a href="#term_EventItem">EventItem</a> | <a href="#term_Image">Image</a> | <a href="#term_Item">Item</a> | <a href="#term_ItemFeed">ItemFeed</a> | <a href="#term_LocalisedItem">LocalisedItem</a> | <a href="#term_Participation">Participation</a> | <a href="#term_Rating">Rating</a> | <a href="#term_ReaderTag">ReaderTag</a> | <a href="#term_Resource">Resource</a> | <a href="#term_ReviewableContainer">ReviewableContainer</a> | <a href="#term_ReviewableItem">ReviewableItem</a> | <a href="#term_SemanticTag">SemanticTag</a> | <a href="#term_Tag">Tag</a> | <a href="#term_TaggedContent">TaggedContent</a> | <a href="#term_Text">Text</a> | <a href="#term_User">User</a> | <a href="#term_UserTag">UserTag</a> | <a href="#term_UserUpdate">UserUpdate</a> |</p>
+<p>Properties: | <a href="#term_endTime">endTime</a> | <a href="#term_frequency">frequency</a> | <a href="#term_has_document">has_document</a> | <a href="#term_has_event">has_event</a> | <a href="#term_has_containerReview">has_containerReview</a> | <a href="#term_has_itemReview">has_itemReview</a> | <a href="#term_has_localisation">has_localisation</a> | <a href="#term_has_participant">has_participant</a> | <a href="#term_has_participation">has_participation</a> | <a href="#term_has_subEvent">has_subEvent</a> | <a href="#term_is_participatingIn">is_participatingIn</a> | <a href="#term_is_participationOf">is_participationOf</a> | <a href="#term_is_reviewingContainer">is_reviewingContainer</a> | <a href="#term_is_reviewingItem">is_reviewingItem</a> | <a href="#term_is_subEventOf">is_subEventOf</a> | <a href="#term_is_tagging">is_tagging</a> | <a href="#term_mimeType">mimeType</a> | <a href="#term_rate">rate</a> | <a href="#term_role">role</a> | <a href="#term_startTime">startTime</a> | <a href="#term_tag">tag</a> | <a href="#term_text">text</a> |</p>
+</div>
+<p>CURIO terms, grouped in broad categories.</p>
+<div class="rdf-proplist">
+<h3>CURIO Basics and Resources</h3>
+<ul>
+<li><a href="#term_Agent">Agent</a></li>
+<li><a href="#term_Container">Container</a></li>
+<li><a href="#term_LocalisedResource">LocalisedResource</a></li>
+<li><a href="#term_has_localisation">has_localisation</a></li>
+<li><a href="#term_has_participant">has_participant</a></li>
+<li><a href="#term_has_participation">has_participation</a></li>
+<li><a href="#term_is_participatingIn">is_participatingIn</a></li>
+<li><a href="#term_is_participationOf">is_participationOf</a></li>
+<li><a href="#term_Item">Item</a></li>
+<li><a href="#term_ItemFeed">ItemFeed</a></li>
+<li><a href="#term_LocalisedItem">LocalisedItem</a></li>
+<li><a href="#term_mimeType">mimeType</a></li>
+<li><a href="#term_Participation">Participation</a></li>
+<li><a href="#term_Resource">Resource</a></li>
+<li><a href="#term_role">role</a></li>
+<li><a href="#term_User">User</a></li>
+<li><a href="#term_UserUpdate">UserUpdate</a></li>
+</ul>
+</div>
+<div class="rdf-proplist">
+<h3>Annotations</h3>
+<ul>
+<li><a href="#term_AnnotationArea">AnnotationArea</a></li>
+<li><a href="#term_AuthorTag">AuthorTag</a></li>
+<li><a href="#term_SemanticTag">AutoTag</a></li>
+<li><a href="#term_frequency">frequency</a></li>
+<li><a href="#term_has_containerReview">has_containerReview</a></li>
+<li><a href="#term_has_itemReview">has_itemReview</a></li>
+<li><a href="#term_is_reviewingContainer">is_reviewingContainer</a></li>
+<li><a href="#term_is_reviewingItem">is_reviewingItem</a></li>
+<li><a href="#term_is_tagging">is_tagging</a></li>
+<li><a href="#term_rate">rate</a></li>
+<li><a href="#term_Rating">Rating</a></li>
+<li><a href="#term_ReaderTag">ReaderTag</a></li>
+<li><a href="#term_ReviewableContainer">ReviewableContainer</a></li>
+<li><a href="#term_ReviewableItem">ReviewableItem</a></li>
+<li><a href="#term_SemanticTag">SemanticTag</a></li>
+<li><a href="#term_Tag">Tag</a></li>
+<li><a href="#term_tag">tag</a></li>
+<li><a href="#term_TaggedContent">TaggedContent</a></li>
+<li><a href="#term_UserTag">UserTag</a></li>
+</ul>
+</div>
+<div class="rdf-proplist">
+<h3>Documents</h3>
+<ul>
+<li><a href="#term_Audio">Audio</a></li>
+<li><a href="#term_content">content</a></li>
+<li><a href="#term_Document">Document</a></li>
+<li><a href="#term_Image">Image</a></li>
+<li><a href="#term_Text">Text</a></li>
+<li><a href="#term_text">text</a></li>
+</ul>
+</div>
+<div class="rdf-proplist">
+<h3>Events</h3>
+<ul>
+<li><a href="#term_endTime">endTime</a></li>
+<li><a href="#term_Event">Event</a></li>
+<li><a href="#term_EventItem">EventItem</a></li>
+<li><a href="#term_has_document">has_document</a></li>
+<li><a href="#term_has_event">has_event</a></li>
+<li><a href="#term_has_subEvent">has_subEvent</a></li>
+<li><a href="#term_is_subEventOf">is_subEventOf</a></li>
+<li><a href="#term_startTime">startTime</a></li>
+</ul>
+</div>
+</div>
+<div class="c2"></div>
+<h2 id="sec-overview">CURIO overview</h2>
+<p>The CURIO Ontology is written in RDF/OWL and reusing many concepts from SIOC. The following diagram represents an high level overview of the CURIO vocabulary.</p>
+<div class="c6"><a href="css/dia0_4_full.png" class="jqzoom c4"><img alt="The CURIO Ontology" class="c3" src="css/dia0_4_small.png" /></a>
+<div class="preload c5">Loading zoom</div>
+<div class="preload c5">Loading zoom</div>
+</div>
+<div class="c7">
+<p>Use the mouse cursor over the diagram for <em>zooming</em> it. You can also download the <a href="css/dia0_4_full.png">full version of the picture</a>.</p>
+</div>
+<div class="c2"></div>
+<h3 id="sec-example">Example</h3>
+<p>Here is a very basic description of a Document Resource:</p>
+<div class="example">
+<pre>
+&lt;curio:Document&gt;
+  &lt;sioc:about&gt;mage0197.jpg&lt;/sioc:about&gt;
+  &lt;dc:title&gt;Fallen Tree.&lt;/dc:title&gt;
+  &lt;dc:description&gt;The charter square roundabout has been blocked by a fallen tree.&lt;/dc:description&gt;
+  &lt;dc:created xsi:type='xsd:dateTime'&gt;2001-10-26T19:32:52Z&lt;/dc:created&gt;
+&lt;/curio:Document&gt;
+</pre></div>
+<p>This example, defines a small document resource. The document is a picture. It has a title, a description and a date. A document may have more properties.</p>
+<p>The previous example can be encoded in RDFa as well:</p>
+<div class="example">
+<pre>
+&lt;tr typeof='curio:Document'&gt;
+  &lt;td property='sioc:about' content='image0197.jpg'&gt;&lt;img src='image0197.jpg' /&gt;&lt;/td&gt;
+  &lt;td property='dc:title'&gt;Fallen Tree.&lt;/td&gt;
+  &lt;td property='dc:description'&gt;The charter square roundabout has been blocked by a fallen tree.&lt;/td&gt;
+  &lt;td content='2001-10-26T19:32:52Z' datatype='xsd:dateTime' property='dc:created'&gt;26/10/2001 at 19:32&lt;/td&gt;
+&lt;/tr&gt;
+</pre></div>
+<div class="c2"></div>
+<!-- ================================================================== -->
+<h3 id="sec-bg">Background</h3>
+<p>CURIO is being developed within the <a href="http://oak.dcs.shef.ac.uk/">Organisations, Information and Knowledge (OAK) Group</a> at the <a href="http://www.shef.ac.uk/">University of Sheffield</a>. This project has received funding from the EU project <a href="http://www.weknowit.eu/">WeKnowIt</a> (ICT-215453). The name "CURIO" is an acronym for "Collaborative User Resource Interaction Ontology". CURIO is also a short word that means "curiosity". The vocabulary was previously internally named "Interaction Model" within the <a href="http://www.weknowit.eu/">WeKnowIt project</a>.</p>
+<p>The rest of this document introduces the most important classes and properties (relationship and attribute) of CURIO. It is highly recommended to read first the <a href="http://rdfs.org/sioc/spec/">SIOC specification</a> for a better understanding of CURIO.</p>
+<p>The specific contents of the CURIO Vocabulary are detailed in the CURIO Core Vocabulary Namespace document.</p>
+<h2 id="sec-desc">The CURIO Vocabulary description</h2>
+<p>This specification introduces CURIO as a <a href="http://www.w3.org/2001/sw/">Semantic Web</a> vocabulary or <em>ontology</em>. It describes the CURIO Core Vocabulary and the terms (<a href="http://www.w3.org/RDF/">RDF</a> classes and properties) that constitute it, so that <a href="http://www.w3.org/2001/sw/">Semantic Web</a> applications can use those terms in a variety of RDF-compatible document formats and applications.</p>
+<h3 id="sec-evolution">Evolution and Extension of CURIO</h3>
+<p>The CURIO ontology is identified by the namespace URI "http://purl.org/net/curio/ns#".</p>
+<p>Revisions and extensions of SIOC are conducted through edits to the namespace document, which by convention is published on the Web at the namespace URI.</p>
+<h3 id="sec-modules">CURIO Modules</h3>
+<p>CURIO modules are extensions to the CURIO Core Vocabulary. A module provides additional features to the core ontology such as specific type of resources. Currently, CURIO has two modules: Resources (curior) and Documents (curiod).</p>
+<h4>CURIO Annotations Module</h4>
+<p>This module adds annotation functionalities to the Item and Container classes. The different classes enable the collaborative description and the collaborative argumentation of the content managed by CURIO.</p>
+<p>Classes defined within this module: AnnotationArea, AuthorTag, AutoTag, Rating, ReaderTag, ReviewableContainer, ReviewableItem, SemanticTag, Tag, TaggedContent, UserTag.</p>
+<p>A full definition of these classes and related properties can be found in the namespace of the CURIO Annotations module at <a href="http://purl.org/net/curio/annotations#">http://purl.org/net/curio/annotations#</a>.</p>
+<h4>CURIO Resources Module</h4>
+<p>The main idea of CURIO is the concept of Resource. A resource is a piece of information generated by a user. This module describes classes that define different type of resources.</p>
+<p>Classes defined within this module: Event.</p>
+<p>A full definition of these classes and related properties can be found in the namespace of the CURIO Resources module at <a href="http://purl.org/net/curio/resources#">http://purl.org/net/curio/resources#</a>.</p>
+<h4>CURIO Documents Module</h4>
+<p>Community platforms very often deal with files or such type of document resources. These resources can be grouped under the concept of Document, a specific type of Resource. For instance, a platform may deals with specific type of data such as images or audio document. In this context it is necessary to provide a suitable representation of such kind of information.</p>
+<p>Classes defined within this module: Audio, Document, Image, Text.</p>
+<p>A full definition of these classes and related properties can be found in the namespace of the CURIO Resources module at <a href="http://purl.org/net/curio/documents#">http://purl.org/net/curio/documents#</a>.</p>
+<h3 id="sec-standards">CURIO and Standards</h3>
+<p>CURIO is a contribution to the Semantic Web, the specification is written using W3C's <a href="http://www.w3.org/RDF/">Resource Description Framework</a> (RDF). As a consequence, CURIO adopts XML as its representation language.</p>
+<h2 id="sec-crossref">CURIO cross-reference: Listing CURIO Classes and Properties</h2>
+<p>CURIO introduces the following classes and properties. There is a link at the top of this document to the RDF/XML version.</p>
+<!-- the following is the script-generated list of classes and properties -->
+<!-- this is the a-z listing -->
+<div class="azlist">
+<p>Classes: | <a href="#term_Agent">Agent</a> | <a href="#term_AnnotationArea">AnnotationArea</a> | <a href="#term_Audio">Audio</a> | <a href="#term_AuthorTag">AuthorTag</a> | <a href="#term_SemanticTag">AutoTag</a> | <a href="#term_Container">Container</a> | <a href="#term_Document">Document</a> | <a href="#term_Event">Event</a> | <a href="#term_EventItem">EventItem</a> | <a href="#term_Image">Image</a> | <a href="#term_Item">Item</a> | <a href="#term_ItemFeed">ItemFeed</a> | <a href="#term_LocalisedItem">LocalisedItem</a> | <a href="#term_Participation">Participation</a> | <a href="#term_Rating">Rating</a> | <a href="#term_ReaderTag">ReaderTag</a> | <a href="#term_Resource">Resource</a> | <a href="#term_ReviewableContainer">ReviewableContainer</a> | <a href="#term_ReviewableItem">ReviewableItem</a> | <a href="#term_SemanticTag">SemanticTag</a> | <a href="#term_Tag">Tag</a> | <a href="#term_TaggedContent">TaggedContent</a> | <a href="#term_Text">Text</a> | <a href="#term_User">User</a> | <a href="#term_UserTag">UserTag</a> | <a href="#term_UserUpdate">UserUpdate</a> |</p>
+<p>Properties: | <a href="#term_endTime">endTime</a> | <a href="#term_frequency">frequency</a> | <a href="#term_has_document">has_document</a> | <a href="#term_has_event">has_event</a> | <a href="#term_has_containerReview">has_containerReview</a> | <a href="#term_has_itemReview">has_itemReview</a> | <a href="#term_has_localisation">has_localisation</a> | <a href="#term_has_participant">has_participant</a> | <a href="#term_has_participation">has_participation</a> | <a href="#term_has_subEvent">has_subEvent</a> | <a href="#term_is_participatingIn">is_participatingIn</a> | <a href="#term_is_participationOf">is_participationOf</a> | <a href="#term_is_reviewingContainer">is_reviewingContainer</a> | <a href="#term_is_reviewingItem">is_reviewingItem</a> | <a href="#term_is_subEventOf">is_subEventOf</a> | <a href="#term_is_tagging">is_tagging</a> | <a href="#term_mimeType">mimeType</a> | <a href="#term_rate">rate</a> | <a href="#term_role">role</a> | <a href="#term_startTime">startTime</a> | <a href="#term_tag">tag</a> | <a href="#term_text">text</a> |</p>
+</div>
+<!-- and this is the bulk of the vocab descriptions -->
+<!--<div class="termlist"><h3>Classes and Properties (full detail)</h3>
+<div class="termdetails"><br> -->
+<h2>Classes</h2>
+<div class="specterm" id="term_Agent">
+<h3>Class: curio:Agent</h3>
+<em>Agent</em> - An agent (eg. person, group, software or physical artifact).<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>stable</span></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="http://xmlns.com/foaf/spec/#term_Agent">foaf:Agent</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_AbstractResource">Agent</a></code> class is simply a subclass of <code><a href="http://xmlns.com/foaf/spec/#term_Agent">foaf:Agent</a></code>. As a consequence, it shares all the properties of a <code><a href="http://xmlns.com/foaf/spec/#term_Agent">foaf:Agent</a></code>.</p>
+</div>
+<div class="specterm" id="term_AnnotationArea">
+<h3>Class: curioa:AnnotationArea</h3>
+<em>AnnotationArea</em> - A container that contains collaborative annotations.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>test</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#term_is_reviewingContainer">is_reviewingContainer</a> <a href="#term_is_reviewingItem">is_reviewingItem</a></td>
+</tr>
+<tr>
+<th>Used with:</th>
+<td><a href="#term_has_containerReview">has_containerReview</a> <a href="#term_has_itemReview">has_itemReview</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="http://rdfs.org/sioc/types#ReviewArea">sioc:ReviewArea</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_AnnotationArea">AnnotationArea</a></code> class enables the annotation of an <code><a href="#term_Item">Item</a></code> and <code><a href="#term_Container">Container</a></code>.</p>
+</div>
+<div class="specterm" id="term_Audio">
+<h3>Class: curiod:Audio</h3>
+<em>Audio</em> - An audio resource as defined within the <a href="http://purl.org/net/curio/documents#Audio">Documents Module namespace</a> (speech, music etc...).<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_Document">Document</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_Audio">curiod:Image</a></span> <span><a href="#term_Text">curiod:Text</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_Audio">curior:Audio</a></code> class a very basic document designed for modeling audio content. This class is defined within the <a href="http://purl.org/net/curio/documents#Audio">Documents Module namespace</a>.</p>
+</div>
+<div class="specterm" id="term_AuthorTag">
+<h3>Class: curio:AuthorTag</h3>
+<em>AuthorTag</em> - A tag asserted by the author of a resource.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>stable</span></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_UserTag">UserTag</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_AuthorTag">AutoTag</a></span> <span><a href="#term_ReaderTag">ReaderTag</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_AuthorTag">AuthorTag</a></code> class is a specific type of <code><a href="#term_ReaderTag">UserTag</a></code> designed for identifying that the creator of this tag is also the creator of the resource.</p>
+</div>
+<div class="specterm" id="term_AutoTag">
+<h3>Class: curio:AutoTag</h3>
+<em>AutoTag</em> - A tag asserted by the software agent.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>stable</span></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_UserTag">UserTag</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_AuthorTag">AuthorTag</a></span> <span><a href="#term_ReaderTag">ReaderTag</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_AuthorTag">AutoTag</a></code> class is a specific type of <code><a href="#term_ReaderTag">UserTag</a></code> designed for identifying that it has been asserted by an automatic system.</p>
+</div>
+<div class="specterm" id="term_Container">
+<h3>Class: curio:Container</h3>
+<em>Container</em> - A resource that contains different items.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>test</span></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="http://rdfs.org/sioc/spec/#term_Container">Container</a></span> <span><a href="#term_Resource">Resource</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_Item">Item</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_Container">Container</a></code> class is a generic class designed for grouping a set of <code><a href="#term_Item">Item</a></code>.</p>
+</div>
+<div class="specterm" id="term_Document">
+<h3>Class: curio:Document</h3>
+<em>Document</em> - A document resource asserted by a user (typically a media file).<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#mimeType">mimeType</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_Resource">Resource</a></span> <span><a href="#term_TaggedContent">TaggedContent</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_Event">curior:Event</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_Document">Document</a></code> class specifies an object uploaded by a user on a platform. Typically, a document can be considered as a file object. The uploaded object should be connected using the <code><a href="http://rdfs.org/sioc/spec/#term_about">sioc:about</a></code> property and the associated <code><a href="#term_mimeType">mimeType</a></code>.</p>
+</div>
+<div class="specterm" id="term_Event">
+<h3>Class: curior:Event</h3>
+<em>Event</em> - The representation of a real world event as defined within the <a href="http://purl.org/net/curio/resources#Event">Resources Module namespace</a>.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#has_document">has_document</a> <a href="#has_localisation">has_localisation</a> <a href="#has_participation">has_participation</a> <a href="#has_subEvent">has_subEvent</a> <a href="#is_subEventOf">is_subEventOf</a> <a href="#startTime">startTime</a> <a href="#endTime">endTime</a></td>
+</tr>
+<tr>
+<th>Used with:</th>
+<td><a href="#has_event">has_event</a> <a href="#is_participationOf">is_participationOf</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_Item">LocalisedItem</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_EventResource">curior:EventResource</a></span> <span><a href="#term_Document">Document</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_Event">curior:Event</a></code> class specifies an event happening in the real world. Accordingly, an event is bounded by a geo localisation and a time frame.</p>
+</div>
+<div class="specterm" id="term_EventResource">
+<h3>Class: curior:EventItem</h3>
+<em>EventItem</em> - The representation of an event resource as defined within the <a href="http://purl.org/net/curio/resources#Event">Resources Module namespace</a>.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#has_event">has_event</a></td>
+</tr>
+<tr>
+<th>Used with:</th>
+<td><a href="#has_document">has_document</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_Item">Item</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_Event">curior:Event</a></span> <span><a href="#term_UserUpdate">UserUpdate</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_EventItem">curior:EventItem</a></code> class specifies a resource that participates in a <code><a href="#term_Event">Event</a></code>. Typically, such type of resource is a <code><a href="#term_Document">Document</a></code> that describes in a different manner a particular <code><a href="#term_Event">curior:Event</a></code>.</p>
+</div>
+<div class="specterm" id="term_Image">
+<h3>Class: curiod:Image</h3>
+<em>Image</em> - An image document as defined within the <a href="http://purl.org/net/curio/documents#Image">Documents Module namespace</a>.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_Resource">Document</a></span> <span><a href="http://xmlns.com/foaf/spec/#term_Image">foaf:Image</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_Audio">curiod:Audio</a></span> <span><a href="#term_Text">curiod:Text</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_Image">Image</a></code> class is subclassing <code><a href="http://xmlns.com/foaf/spec/#term_Image">foaf:Image</a></code>. As a consequence, it shares all the properties of a <code><a href="http://xmlns.com/foaf/spec/#term_Image">foaf:Image</a></code>.</p>
+</div>
+<div class="specterm" id="term_Item">
+<h3>Class: curio:Item</h3>
+<em>Item</em> - An atomic resource that may be contained within an Container.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>test</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#term_has_containerReview">has_itemReview</a></td>
+</tr>
+<tr>
+<th>Used with:</th>
+<td><a href="#term_is_reviewingContainer">is_reviewingItem</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="http://rdfs.org/sioc/spec/#term_Item">Item</a></span> <span><a href="#term_Resource">Resource</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_Container">Container</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_Item">Item</a></code> class is a generic class designed for managing user generated content.</p>
+</div>
+<div class="specterm" id="term_ItemFeed">
+<h3>Class: curio:ItemFeed</h3>
+<em>ItemFeed</em> - A representation of the change sets of an item.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_item">Container</a></span> <span><a href="http://rdfs.org/sioc/spec/#term_SubscriptionList">SubscriptionList</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_ResourceFeed">ItemFeed</a></code> represents the change sets of an <code><a href="#term_item">Item</a></code>. It can be assimilated to an RSS feed.</p>
+</div>
+<div class="specterm" id="term_LocalisedItem">
+<h3>Class: curio:LocalisedItem</h3>
+<em>LocalisedItem</em> - The resource that is geolocated.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#has_document">has_document</a> <a href="#has_localisation">has_localisation</a> <a href="#has_participation">has_participation</a> <a href="#has_subEvent">has_subEvent</a> <a href="#is_subEventOf">is_subEventOf</a> <a href="#startTime">startTime</a> <a href="#endTime">endTime</a></td>
+</tr>
+<tr>
+<th>Used with:</th>
+<td><a href="#has_event">has_event</a> <a href="#is_participationOf">is_participationOf</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_Resource">Resource</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_EventResource">curior:EventResource</a></span> <span><a href="#term_Document">Document</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_LocalisedItem">LocalisedItem</a></code> class refers to a document with an associated localisation. This class may be used for assigning GPS coordinates to a picture or any other type of document.</p>
+</div>
+<div class="specterm" id="term_Participation">
+<h3>Class: curior:Participation</h3>
+<em>Participation</em> - An participation as defined within the <a href="http://purl.org/net/curio/resources#Participation">Resources Module namespace</a>.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#term_has_participant">has_participant</a> <a href="#term_is_participationOf">is_participationOf</a> <a href="#term_role">role</a></td>
+</tr>
+<tr>
+<th>Used with:</th>
+<td><a href="#term_has_participation">has_participation</a> <a href="#term_is_participatingIn">is_participatingIn</a></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#Participation">curior:Participation</a></code> class attributes link a user to an event resource through a role. A role defines how a user is involved within an event.</p>
+</div>
+<div class="specterm" id="term_Rating">
+<h3>Class: curio:Rating</h3>
+<em>Rating</em> - A decimal value (0..1) defining the rating of a resource.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#term_Rating">Rating</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="http://rdfs.org/sioc/types#Comment">Comment</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_Rating">Rating</a></code> class is a particular comment. It enables a user to assign a rating to a particular resource. The value is a decimal value between 0 and 1. The best rating is 1. The worst 0.</p>
+</div>
+<div class="specterm" id="term_ReaderTag">
+<h3>Class: curio:ReaderTag</h3>
+<em>ReaderTag</em> - A tag asserted by an agent while reading a resource.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>stable</span></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_UserTag">UserTag</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_AutoTag">AutoTag</a></span> <span><a href="#term_ReaderTag">ReaderTag</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_ReaderTag">ReaderTag</a></code> class is a specific type of <code><a href="#term_ReaderTag">UserTag</a></code> designed for identifying that it has been asserted by an agent that has not created the tagged resource.</p>
+</div>
+<div class="specterm" id="term_Resource">
+<h3>Class: curio:Resource</h3>
+<em>AbstractResource</em> - An internal model of a Resource (this class should not be instantiated directly).<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>stable</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="http://dublincore.org/documents/dcmi-terms/#terms-created">dc:created</a> <a href="http://dublincore.org/documents/dcmi-terms/#terms-source">dc:source</a> <a href="http://dublincore.org/documents/dcmi-terms/#terms-title">dc:title</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="http://xmlns.com/foaf/spec/#term_Document">foaf:Document</a></span></td>
+</tr>
+<tr>
+<th>has subclass</th>
+<td><a href="#term_Container">Container</a> <a href="#term_Item">Item</a></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_Resource">Resource</a></code> class is class modeling some attribute of a <code><a href="#term_Resource">Resource</a></code>. This class should not be instantiated directly.</p>
+</div>
+<div class="specterm" id="term_ReviewableContainer">
+<h3>Class: curioa:ReviewableContainer</h3>
+<em>ReviewableContainer</em> - A resource that contains different items and is annotated.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>test</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#term_has_containerReview">has_containerReview</a></td>
+</tr>
+<tr>
+<th>Used with:</th>
+<td><a href="#term_is_reviewingContainer">is_reviewingContainer</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="http://rdfs.org/sioc/spec/#term_Container">Container</a></span> <span><a href="#term_TaggedContent">TaggedContent</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_ReviewableItem">ReviewableItem</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_ReviewableItem">ReviewableItem</a></code> class is a generic class designed for grouping a set of <code><a href="#term_Item">Item</a></code> and contains annotations.</p>
+</div>
+<div class="specterm" id="term_ReviewableItem">
+<h3>Class: curioa:ReviewableItem</h3>
+<em>ReviewableItem</em> - An atomic resource that may be contained within an Container and is annotated.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>test</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#term_has_containerReview">has_itemReview</a></td>
+</tr>
+<tr>
+<th>Used with:</th>
+<td><a href="#term_is_reviewingContainer">is_reviewingItem</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_Item">Item</a></span> <span><a href="#term_TaggedContent">TaggedContent</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_ReviewableContainer">ReviewableContainer</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_ReviewableItem">ReviewableItem</a></code> class is a generic class designed for managing user generated content.</p>
+</div>
+<div class="specterm" id="term_SemanticTag">
+<h3>Class: curioa:SemanticTag</h3>
+<em>SemanticTag</em> - A tag with an associated meaning.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="http://commontag.org/ns#means">means</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_Tag">Tag</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_SemanticTag">SemanticTag</a></code> is a normal Tag class with an additional means property. This property enables the association of tag and a resource that gives a meaning to a tag label.</p>
+</div>
+<div class="specterm" id="term_Tag">
+<h3>Class: curioa:Tag</h3>
+<em>Tag</em> - A free text label associated to a resource.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>stable</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#term_label">frequency</a> <a href="http://commontag.org/ns#label">label</a></td>
+</tr>
+<tr>
+<th>Used with:</th>
+<td><a href="#term_tag">tag</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_Tag">Tag</a></span></td>
+</tr>
+<tr>
+<th>has subclass</th>
+<td><a href="#term_SemanticTag">SemanticTag</a></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_Tag">Tag</a></code> is free text label associated to a resource. The frequency property may be used for representing the tag cloud of a resource.</p>
+</div>
+<div class="specterm" id="term_TaggedContent">
+<h3>Class: curioa:TaggedContent</h3>
+<em>TaggedContent</em> - A resource that has been tagged.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>stable</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="http://commontag.org/ns#tagged">tagged</a></td>
+</tr>
+<tr>
+<th>Used with:</th>
+<td><a href="#term_tagging">tagging</a></td>
+</tr>
+<tr>
+<th>has subclass</th>
+<td><a href="#term_Resource">Resource</a> <a href="#term_User">User</a></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_TaggedContent">TaggedContent</a></code> class identifies a resource with associated <code><a href="#term_Tag">Tag</a></code>.</p>
+</div>
+<div class="specterm" id="term_Text">
+<h3>Class: curiod:Text</h3>
+<em>Text</em> - A textual document as defined within the <a href="http://purl.org/net/curio/documents#Image">Documents Module namespace</a>.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#term_text">text</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_Resource">Document</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_Audio">curiod:Audio</a></span> <span><a href="#term_Text">curiod:Image</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_Text">curiod:Text</a></code> class defines a textual document uploaded by a user.</p>
+</div>
+<div class="specterm" id="term_User">
+<h3>Class: curio:User</h3>
+<em>Text</em> - A user contributing to the platform.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>stable</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="#term_is_participatingIn">is_participatingIn</a></td>
+</tr>
+<tr>
+<th>Used with:</th>
+<td><a href="#term_has_participant">has_participant</a></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_Resource">TaggedContent</a></span> <span><a href="http://rdfs.org/sioc/ns#User">sioc:User</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>A <code><a href="#term_User">User</a></code> class defines a person using a collaborative platform.</p>
+</div>
+<div class="specterm" id="term_UserTag">
+<h3>Class: curio:UserTag</h3>
+<em>UserTag</em> - A tag asserted on a given resource.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>stable</span></td>
+</tr>
+<tr>
+<th>Properties include:</th>
+<td><a href="http://rdfs.org/sioc/ns#creator_of">creator_of</a> <a href="#term_tag">tag</a> <a href="#term_tagging">tagging</a> <a href="http://commontag.org/ns#taggingDate">taggingDate</a></td>
+</tr>
+<tr>
+<th>has subclass</th>
+<td><a href="#term_AuthorTag">AuthorTag</a> <a href="#term_AutoTag">AutoTag</a> <a href="#term_ReaderTag">ReaderTag</a></td>
+</tr>
+</tbody>
+</table>
+<p>A <code><a href="#term_UserTag">UserTag</a></code> class defines a tag assertion on a resource by a user of the system.</p>
+</div>
+<div class="specterm" id="term_UserUpdate">
+<h3>Class: curio:UserUpdate</h3>
+<em>UserUpdate</em> - A list of changes of a user profile.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>subClassOf</th>
+<td><span><a href="#term_AbstractResource">AbstractResource</a></span></td>
+</tr>
+<tr>
+<th>Disjoint With:</th>
+<td><span><a href="#term_Document">Document</a></span> <span><a href="#term_Event">curior:Event</a></span> <span><a href="#term_EventResource">curior:EventResource</a></span> <span><a href="#term_Resource">Resource</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>A <code><a href="#term_UserTag">UserTag</a></code> class defines a tag assertion on a resource by a user of the system.</p>
+</div>
+<h2>Properties</h2>
+<p class="editorial">This documentation is work in progress. Some properties are not documented yet.</p>
+<div class="specterm" id="term_text">
+<h3>Property: curiod:text</h3>
+<em>text</em> - The content of a textual document.<br />
+<table>
+<tbody>
+<tr>
+<th>Status:</th>
+<td><span>testing</span></td>
+</tr>
+<tr>
+<th>Domain:</th>
+<td><span><a href="#term_Thing">A thing</a></span></td>
+</tr>
+<tr>
+<th>Range:</th>
+<td><span><a href="#term_Text">curiod:Text</a></span></td>
+</tr>
+</tbody>
+</table>
+<p>The <code><a href="#term_text">curiod:text</a></code> property specifies the content of a textual document.</p>
+</div>
+</div>
+<h2 id="sec-ack">Acknowledgments</h2>
+<p>The <em>CURIO Vocabulary</em> is being developed within the <a href="http://oak.dcs.shef.ac.uk/">Organisations, Information and Knowledge (OAK) Group</a> at the <a href="http://www.shef.ac.uk/">University of Sheffield</a>. This project has received funding from the EU project <a href="http://www.weknowit.eu/">WeKnowIt</a> (ICT-215453).</p>
+<p>The style of the documentation is largely based on the documentation layout of <a href="http://rdfs.org/sioc/spec/">SIOC</a> and <a href="http://xmlns.com/foaf/spec/">FOAF</a>.</p>
+<div class="c9"><a href="http://www.shef.ac.uk/"><img src="css/uni.gif" alt="University Of Sheffield" /></a> <a href="http://oak.dcs.shef.ac.uk/"><img class="c8" src="css/oak.png" alt="OAK Group" /></a> <a href="http://www.weknowit.eu/"><img src="css/wki.png" alt="WeKnowIt" /></a></div>
+<h2 id="sec-refs">References</h2>
+<ul>
+<li><a id="ref-rfc2119"></a>[RFC 2119] S. Bradner, "Key words for use in RFCs to Indicate Requirement Levels", RFC 2119, Harvard University, March 1997, <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.</li>
+<li><a id="ref-rfc2396"></a>[RFC 2396] T. Berners-Lee et al., "Uniform Resource Identifiers (URI): Generic Syntax", RFC 2396, Internet Engineering Task Force, August 1998, <a href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>.</li>
+</ul>
+<h2 id="sec-changes">Change log</h2>
+<h3 id="sec-changes20100315">2011-02-01 (0.5b)</h3>
+<ul>
+<li>Changes in the has_localisation. (wgs84 ontology)</li>
+</ul>
+
+<h3 id="sec-changes20100315">2010-03-15 (0.4b)</h3>
+<ul>
+<li>New core classes: Container and Item.</li>
+<li>AbstractResource changed to Resource (a Resource is now an Item).</li>
+<li>ItemFeed replaces ResourceFeed.</li>
+<li>EventItem replaces ItemResource.</li>
+<li>LocalisedItem replaces LocalisedResource.</li>
+<li>Annotations Module added (http://purl.org/net/curio/annotations#).</li>
+<li>Annotations Module: AnnotationArea replaces ReviewArea.</li>
+<li>Annotations Module: ReviewableItem and ReviewableContentclasses added.</li>
+</ul>
+<h3 id="sec-changes20100212">2010-02-12 (0.2b)</h3>
+<ul>
+<li>The CURIO Core Vocabulary is flagged as "Beta".</li>
+<li>An Abstract resource now inherit from sioc:Item and foaf:Document instead of sioc:Post.</li>
+<li>Partial HTML documentation.</li>
+<li>New ontology namespace: http://purl.org/net/curio/ns#.</li>
+<li>New ontology name: Collaborative User Resource Ontology - CURIO (The previous name was confusing and not really reflecting the purposes of the ontology).</li>
+<li>CURIO is up to date with the latest version of FOAF and SIOC.</li>
+<li>dc:source added to curio:Resource for managing automatic insertion of Resources.</li>
+<li>Documents Module added (http://purl.org/net/curio/documents#).</li>
+<li>Resources Module added (http://purl.org/net/curio/resources#).</li>
+<li>Document Module: new subclasses: Image ("foaf:thumbnail" property), Text (content property) and Audio</li>
+<li>Resources Module: Event classes moved to the Resource Module</li>
+</ul>
+<h3 id="sec-changes20091103">2009-11-03 (0.1.2a)</h3>
+<ul>
+<li>Document subclass has now a mimeType.</li>
+</ul>
+<h3 id="sec-changes20090921">2009-09-21 (0.1.1a)</h3>
+<ul>
+<li>Replacement of CommonTag with the WKI Tag Ontology.</li>
+<li>RDF Serialization.</li>
+</ul>
+<h3 id="sec-changes20090914">2009-09-14 (0.1a)</h3>
+<ul>
+<li>Initial Version of the ontology.</li>
+</ul>
+<div id="extra-div1"></div>
+</body>
+</html>

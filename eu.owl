@@ -1,0 +1,631 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://socsem.open.ac.uk/ontologies/eu#"
+     xml:base="http://socsem.open.ac.uk/ontologies/eu"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:ns="http://creativecommons.org/ns#"
+     xmlns:muo="http://purl.oclc.org/NET/muo/muo#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <owl:Ontology rdf:about="http://socsem.open.ac.uk/ontologies/eu#">
+        <owl:imports rdf:resource="http://elite.polito.it/ontologies/poweront.owl"/>
+        <owl:imports rdf:resource="http://purl.org/muto/core"/>
+        <owl:imports rdf:resource="http://rdfs.org/sioc/ns#"/>
+        <dc:date>2016-04-22</dc:date>
+        <rdfs:seeAlso rdf:resource="http://energyuse.eu"/>
+        <rdfs:comment xml:lang="en">The EnergyUse ontology is a model for representing the public content of the energyuse.eu website. In particular, it allows the publication of discussions related to energy consumption and the modelling of actual aggregated energy consumption measures of home appliances.
+
+This document represents the Energy Use ontology definition of the most important entities and atributes required for publishing content similar to the one produced in the EnergyUse platform.</rdfs:comment>
+        <terms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2012-06-14</terms:modified>
+        <dc:description xml:lang="en">The Energy Use ontology is a model for representing the public content of the energyuse.eu website. In particular, it allows the publication of discussions related to energy consumption and the modelling of actual aggregated energy consumption measures of home appliances.</dc:description>
+        <dc:creator>Grégoire Burel</dc:creator>
+        <dc:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Energy Use Ontology</dc:title>
+        <dc:description rdf:resource="http://socsem.open.ac.uk/ontologies/eu.png"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#bestReply -->
+
+    <owl:ObjectProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#bestReply">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Discussion"/>
+        <rdfs:range rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Reply"/>
+        <rdfs:comment xml:lang="en">Identify the best reply associated with a given discussion.</rdfs:comment>
+        <rdfs:label>bestReply</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#concept -->
+
+    <owl:ObjectProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#concept">
+        <owl:inverseOf rdf:resource="http://socsem.open.ac.uk/ontologies/eu#discussion"/>
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Discussion"/>
+        <rdfs:range rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Concept"/>
+        <rdfs:comment xml:lang="en">A Concept linked to a discussion.</rdfs:comment>
+        <rdfs:label>concept</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#consumptionSummary -->
+
+    <owl:ObjectProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#consumptionSummary">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Appliance"/>
+        <rdfs:range rdf:resource="http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyConsumptionSummary"/>
+        <rdfs:comment xml:lang="en">Link summary statistics about the consumption of a given appliance.</rdfs:comment>
+        <rdfs:label>consumptionSummary</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#discussion -->
+
+    <owl:ObjectProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#discussion">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Concept"/>
+        <rdfs:range rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Discussion"/>
+        <rdfs:comment xml:lang="en">A discussion linked to a given Concept.</rdfs:comment>
+        <rdfs:label>discussion</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#energyConsumptionStatistic -->
+
+    <owl:ObjectProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#energyConsumptionStatistic">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyConsumptionSummary"/>
+        <rdfs:range rdf:resource="http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyStatistic"/>
+        <rdfs:comment xml:lang="en">Associate wnergy consumption statistics with an  ElectricEnergyConsumptioSummary.</rdfs:comment>
+        <rdfs:label>energyConsumptionStatistic</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#meaning -->
+
+    <owl:ObjectProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#meaning">
+        <owl:equivalentProperty rdf:resource="http://purl.org/muto/core#tagMeaning"/>
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Concept"/>
+        <rdfs:comment xml:lang="en">Connect a given Concept with a particular entity that define the given concept (e.g. DBPedia resource).</rdfs:comment>
+        <rdfs:label>meaning</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#measure -->
+
+    <owl:ObjectProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#measure">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#SummaryStatistic"/>
+        <rdfs:range rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Measure"/>
+        <rdfs:comment xml:lang="en">Define the Measure used for a given SUmmaryStatistic.</rdfs:comment>
+        <rdfs:label>measure</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#statistic -->
+
+    <owl:ObjectProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#statistic">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#DataSummary"/>
+        <rdfs:range rdf:resource="http://socsem.open.ac.uk/ontologies/eu#SummaryStatistic"/>
+        <rdfs:comment xml:lang="en">Associate a SummaryStatistic with a DataSummary.</rdfs:comment>
+        <rdfs:label>statistic</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/muto/core#tagMeaning -->
+
+    <rdf:Description rdf:about="http://purl.org/muto/core#tagMeaning"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#content -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#content">
+        <owl:equivalentProperty rdf:resource="http://rdfs.org/sioc/ns#content"/>
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:comment xml:lang="en">Represents the content assossiated witha given Post.</rdfs:comment>
+        <rdfs:label>content</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#created -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#created">
+        <owl:equivalentProperty rdf:resource="http://purl.org/dc/terms/created"/>
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+        <rdfs:comment xml:lang="en">A timestamp representing when a particular Post was created.</rdfs:comment>
+        <rdfs:label>created</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#description -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#description">
+        <owl:equivalentProperty rdf:resource="http://purl.org/dc/terms/description"/>
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Concept"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:comment xml:lang="en">A textual description of a given Concept.</rdfs:comment>
+        <rdfs:label>description</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#energyValue -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#energyValue">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyConsumptionSummary"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment xml:lang="en">The numerical value associated with a given ElectricEnergyStatistic statistic.</rdfs:comment>
+        <rdfs:label>energyValue</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#label -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#label">
+        <owl:equivalentProperty rdf:resource="http://purl.org/muto/core#tagLabel"/>
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Concept"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:comment xml:lang="en">A label decribing a given tag.</rdfs:comment>
+        <rdfs:label>label</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#modified -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#modified">
+        <owl:equivalentProperty rdf:resource="http://purl.org/dc/terms/modified"/>
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+        <rdfs:comment xml:lang="en">A timestamp representing the last time a particular post was edited.</rdfs:comment>
+        <rdfs:label>modified</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#numBookmarks -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#numBookmarks">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+        <rdfs:comment xml:lang="en">Th number of times a given Post has been favourited or bookmarked.</rdfs:comment>
+        <rdfs:label>numBookmarks</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#numObservations -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#numObservations">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#DataSummary"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+        <rdfs:comment xml:lang="en">The number of observations used for generating the sumary information.</rdfs:comment>
+        <rdfs:label>numObservations</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#numProviders -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#numProviders">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#DataSummary"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+        <rdfs:comment xml:lang="en">The number of information sources used for generating the data (e.g. the number of users that give energy measurements in an energy consumption dataset).</rdfs:comment>
+        <rdfs:label>numProviders</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#numUpvotes -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#numUpvotes">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+        <rdfs:comment xml:lang="en">The number of upvotes/likes recieved by a given Post.</rdfs:comment>
+        <rdfs:label>numUpvotes</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#numViews -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#numViews">
+        <owl:equivalentProperty rdf:resource="http://rdfs.org/sioc/ns#num_views"/>
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Discussion"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+        <rdfs:comment xml:lang="en">THe number of times a particular Discussion has been seen.</rdfs:comment>
+        <rdfs:label>numViews</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#removedObservations -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#removedObservations">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#DataSummary"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+        <rdfs:comment xml:lang="en">Describes the number of obserations that are not used in th DataSummary but have been measured in the original dataset.</rdfs:comment>
+        <rdfs:label>removedObservations</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#reputation -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#reputation">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#UserAccount"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">A reputation value defining how important/trustworthy is a given user account. It is typically derived from the ratings of the account contributions.</rdfs:comment>
+        <rdfs:label>reputation</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#title -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#title">
+        <owl:equivalentProperty rdf:resource="http://purl.org/dc/terms/title"/>
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Concept"/>
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Discussion"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:comment xml:lang="en">The title describing a Discussion or Concept.</rdfs:comment>
+        <rdfs:label>title</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#username -->
+
+    <owl:DatatypeProperty rdf:about="http://socsem.open.ac.uk/ontologies/eu#username">
+        <rdfs:domain rdf:resource="http://socsem.open.ac.uk/ontologies/eu#UserAccount"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:comment xml:lang="en">A username used for representing a user in a given platform.</rdfs:comment>
+        <rdfs:label>username</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/created -->
+
+    <rdf:Description rdf:about="http://purl.org/dc/terms/created"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <rdf:Description rdf:about="http://purl.org/dc/terms/description"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/modified -->
+
+    <rdf:Description rdf:about="http://purl.org/dc/terms/modified"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+    <rdf:Description rdf:about="http://purl.org/dc/terms/title"/>
+    
+
+
+    <!-- http://purl.org/muto/core#tagLabel -->
+
+    <rdf:Description rdf:about="http://purl.org/muto/core#tagLabel"/>
+    
+
+
+    <!-- http://rdfs.org/sioc/ns#content -->
+
+    <rdf:Description rdf:about="http://rdfs.org/sioc/ns#content"/>
+    
+
+
+    <!-- http://rdfs.org/sioc/ns#num_views -->
+
+    <rdf:Description rdf:about="http://rdfs.org/sioc/ns#num_views"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://elite.polito.it/ontologies/dogont.owl#Appliances -->
+
+    <rdf:Description rdf:about="http://elite.polito.it/ontologies/dogont.owl#Appliances">
+        <owl:equivalentClass rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Appliance"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#Appliance -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#Appliance">
+        <rdfs:subClassOf rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Concept"/>
+        <rdfs:comment xml:lang="en">An appliance is a specialised Concept taht can be linked with energy consumption measurements.</rdfs:comment>
+        <rdfs:label>Appliance</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#Concept -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#Concept">
+        <rdfs:subClassOf rdf:resource="http://purl.org/muto/core#Tag"/>
+        <rdfs:comment xml:lang="en">A Concept is a generaled topic associated with a Discussion or Appliance. The subclasses Topic and Appliance should be prefered.</rdfs:comment>
+        <rdfs:label>Concept</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#DataSummary -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#DataSummary">
+        <rdfs:comment xml:lang="en">A DataSummary represents high level information about a data distribution in terms of information providers and number of observations.</rdfs:comment>
+        <rdfs:label>DataSummary</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#Discussion -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#Discussion">
+        <rdfs:subClassOf rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Post"/>
+        <rdfs:comment xml:lang="en">A discussion is the first post created when a user create a new discussion. For example it cane be a question or energy saving tip.</rdfs:comment>
+        <rdfs:label>Discussion</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyConsumptionSummary -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyConsumptionSummary">
+        <rdfs:subClassOf rdf:resource="http://socsem.open.ac.uk/ontologies/eu#DataSummary"/>
+        <rdfs:comment xml:lang="en">An ElectricEnergyConsumptionSummary represent the sumary of an energy consumption dataset.</rdfs:comment>
+        <rdfs:label>ElectricEnergyConsumptionSummary</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyStatistic -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyStatistic">
+        <rdfs:subClassOf rdf:resource="http://socsem.open.ac.uk/ontologies/eu#SummaryStatistic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#Measure -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#Measure">
+        <rdfs:comment xml:lang="en">A Measure defines a particular SumaryStatistic measure (e.g. min, max, etc...)</rdfs:comment>
+        <rdfs:label>Measure</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#Post -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#Post">
+        <owl:equivalentClass rdf:resource="http://rdfs.org/sioc/ns#Post"/>
+        <rdfs:comment xml:lang="en">A generic post in a given platform. The Reply/Discussion subclass should be used instead of Post.</rdfs:comment>
+        <rdfs:label>Post</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#Reply -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#Reply">
+        <rdfs:subClassOf rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Post"/>
+        <rdfs:comment xml:lang="en">A reply is associated with a Discussion post. A discussion can have multiple replies but a reply has only one Discussion.</rdfs:comment>
+        <rdfs:label>Reply</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#SummaryStatistic -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#SummaryStatistic">
+        <rdfs:subClassOf rdf:resource="http://purl.oclc.org/NET/muo/muo#QualityValue"/>
+        <rdfs:comment xml:lang="en">A summary statistic provides a praticular value for a given DataSummary. It is associated with a given Measure that defines the nature of the statistic.</rdfs:comment>
+        <rdfs:label>SummaryStatistic</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#Topic -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#Topic">
+        <rdfs:subClassOf rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Concept"/>
+        <rdfs:comment xml:lang="en">A Topic is a Concept that is is used for associateing simple concepts with discussions.</rdfs:comment>
+        <rdfs:label>Topic</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#UserAccount -->
+
+    <owl:Class rdf:about="http://socsem.open.ac.uk/ontologies/eu#UserAccount">
+        <owl:equivalentClass rdf:resource="http://rdfs.org/sioc/ns#UserAccount"/>
+        <rdfs:comment xml:lang="en">A user account associated with energy consumptions readings and posts.</rdfs:comment>
+        <rdfs:label>UserAccount</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://rdfs.org/sioc/ns#Post -->
+
+    <rdf:Description rdf:about="http://rdfs.org/sioc/ns#Post"/>
+    
+
+
+    <!-- http://rdfs.org/sioc/ns#UserAccount -->
+
+    <rdf:Description rdf:about="http://rdfs.org/sioc/ns#UserAccount"/>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#Class -->
+
+    <owl:Class rdf:about="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu# -->
+
+    <owl:NamedIndividual rdf:about="http://socsem.open.ac.uk/ontologies/eu#"/>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyStatistic -->
+
+    <owl:NamedIndividual rdf:about="http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyStatistic">
+        <rdf:type rdf:resource="http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyStatistic"/>
+        <muo:measuredIn rdf:resource="http://socsem.open.ac.uk/ontologies/eu#watt-hour"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#day-mean -->
+
+    <owl:NamedIndividual rdf:about="http://socsem.open.ac.uk/ontologies/eu#day-mean">
+        <rdf:type rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Measure"/>
+        <rdfs:comment xml:lang="en">The mean value in a dataset aggreagted over days.</rdfs:comment>
+        <rdfs:label>day-mean</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#max -->
+
+    <owl:NamedIndividual rdf:about="http://socsem.open.ac.uk/ontologies/eu#max">
+        <rdf:type rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Measure"/>
+        <rdfs:comment xml:lang="en">The maximum value in a dataset.</rdfs:comment>
+        <rdfs:label>max</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#mean -->
+
+    <owl:NamedIndividual rdf:about="http://socsem.open.ac.uk/ontologies/eu#mean">
+        <rdf:type rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Measure"/>
+        <rdfs:comment xml:lang="en">The mean value in a dataset.</rdfs:comment>
+        <rdfs:label>mean</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#min -->
+
+    <owl:NamedIndividual rdf:about="http://socsem.open.ac.uk/ontologies/eu#min">
+        <rdf:type rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Measure"/>
+        <rdfs:comment xml:lang="en">The minimum value in a dataset.</rdfs:comment>
+        <rdfs:label xml:lang="en">min</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#range -->
+
+    <owl:NamedIndividual rdf:about="http://socsem.open.ac.uk/ontologies/eu#range">
+        <rdf:type rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Measure"/>
+        <rdfs:comment xml:lang="en">The range of a dataset.</rdfs:comment>
+        <rdfs:label>range</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#std-dev -->
+
+    <owl:NamedIndividual rdf:about="http://socsem.open.ac.uk/ontologies/eu#std-dev">
+        <rdf:type rdf:resource="http://socsem.open.ac.uk/ontologies/eu#Measure"/>
+        <rdfs:comment xml:lang="en">The standard deviation.</rdfs:comment>
+        <rdfs:label>std-dev</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://socsem.open.ac.uk/ontologies/eu#watt-hour -->
+
+    <owl:NamedIndividual rdf:about="http://socsem.open.ac.uk/ontologies/eu#watt-hour">
+        <rdf:type rdf:resource="http://purl.oclc.org/NET/muo/muo#UnitOfMeasurement"/>
+        <rdfs:comment xml:lang="en">The watt-hours energy consumption unit (Wh).</rdfs:comment>
+        <rdfs:label xml:lang="en">watt-hour</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://socsem.open.ac.uk/ontologies/eu#ElectricEnergyStatistic">
+        <rdfs:label>ElectricEnergyStatistic</rdfs:label>
+        <rdfs:comment xml:lang="en">An ElectricEnergyStatistic, is a statistic designed to measure the energy consumption of electric aplliances.</rdfs:comment>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.1.20160306-0033) https://github.com/owlcs/owlapi -->
+

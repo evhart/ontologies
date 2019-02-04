@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY terms "http://purl.org/dc/terms/" >
+    <!ENTITY time "http://www.w3.org/2006/time#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY ns "http://www.w3.org/2003/06/sw-vocab-status/ns#" >
+    <!ENTITY instead "http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#"
+     xml:base="http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:time="http://www.w3.org/2006/time#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:instead="http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#">
+    <owl:Ontology rdf:about="">
+        <owl:versionInfo xml:lang="en">0.1a</owl:versionInfo>
+        <dc:creator>Gregoire Burel</dc:creator>
+        <dc:description xml:lang="en"
+            >Associating and Discovering Information Instances (Sensor Stream Edition)</dc:description>
+        <dc:title xml:lang="en"
+            >Instance Association Discovery Ontology (INSTeAD)</dc:title>
+        <owl:imports rdf:resource="http://purl.org/dc/terms/"/>
+        <owl:imports rdf:resource="http://www.w3.org/2000/01/rdf-schema"/>
+        <owl:imports rdf:resource="http://www.w3.org/2003/06/sw-vocab-status/ns"/>
+        <owl:imports rdf:resource="http://www.w3.org/2006/time"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&dc;description"/>
+    <owl:AnnotationProperty rdf:about="&ns;term_status"/>
+    <owl:AnnotationProperty rdf:about="&dc;creator"/>
+    <owl:AnnotationProperty rdf:about="&dc;title"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/replaces -->
+
+    <owl:ObjectProperty rdf:about="&terms;replaces"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/source -->
+
+    <owl:ObjectProperty rdf:about="&terms;source"/>
+    
+
+
+    <!-- http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#augments -->
+
+    <owl:ObjectProperty rdf:about="#augments">
+        <rdfs:label xml:lang="en">augments</rdfs:label>
+        <rdfs:comment xml:lang="en"
+            >An association that augments an existing resource by adding a new property to the given resource. This porperty is defined within the role property.</rdfs:comment>
+        <ns:term_status>testing</ns:term_status>
+        <rdfs:subPropertyOf rdf:resource="&terms;replaces"/>
+        <rdfs:domain rdf:resource="#PropertyAssociation"/>
+        <owl:disjointObjectProperties rdf:resource="#replaces"/>
+        <rdfs:range rdf:resource="&rdfs;Resource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#context -->
+
+    <owl:ObjectProperty rdf:about="#context">
+        <rdfs:label xml:lang="en">context</rdfs:label>
+        <ns:term_status>unstable</ns:term_status>
+        <rdfs:comment xml:lang="en"
+            >The Context in wich the Association might be applied.</rdfs:comment>
+        <rdfs:range rdf:resource="#Context"/>
+        <rdfs:domain rdf:resource="#PropertyAssociation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#replaces -->
+
+    <owl:ObjectProperty rdf:about="#replaces">
+        <rdfs:label xml:lang="en">replaces</rdfs:label>
+        <rdfs:comment xml:lang="en"
+            >The resources that is modified by the described association. The object of the associated relation is replaced with the source property.</rdfs:comment>
+        <ns:term_status>testing</ns:term_status>
+        <rdfs:subPropertyOf rdf:resource="&terms;replaces"/>
+        <rdfs:domain rdf:resource="#PropertyAssociation"/>
+        <rdfs:range rdf:resource="&rdfs;Resource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#role -->
+
+    <owl:ObjectProperty rdf:about="#role">
+        <rdfs:label xml:lang="en">role</rdfs:label>
+        <ns:term_status>testing</ns:term_status>
+        <rdfs:comment xml:lang="en"
+            >The type of Property targeted by the given association.</rdfs:comment>
+        <rdfs:domain rdf:resource="#PropertyAssociation"/>
+        <rdfs:range rdf:resource="&rdf;Property"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#source -->
+
+    <owl:ObjectProperty rdf:about="#source">
+        <rdfs:label xml:lang="en">role</rdfs:label>
+        <ns:term_status>testing</ns:term_status>
+        <rdfs:comment xml:lang="en"
+            >The class instance suplanting the given resource.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&terms;source"/>
+        <rdfs:domain rdf:resource="#PropertyAssociation"/>
+        <rdfs:range rdf:resource="&rdfs;Resource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#accuracy -->
+
+    <owl:DatatypeProperty rdf:about="#accuracy">
+        <rdfs:comment xml:lang="en"
+            >A value between 0 and 1 defining the accuracy of the relation. Or, more precisely the accuracy of the linked information.</rdfs:comment>
+        <rdfs:comment xml:lang="en">accuracy</rdfs:comment>
+        <rdfs:comment>testing</rdfs:comment>
+        <rdfs:domain rdf:resource="#PropertyAssociation"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#priority -->
+
+    <owl:DatatypeProperty rdf:about="#priority">
+        <rdfs:comment xml:lang="en"
+            >The priority defines the order in which the replacement occurs. For instance a high number signify that this association should be prefered to a lower level association.</rdfs:comment>
+        <rdfs:comment xml:lang="en">priority</rdfs:comment>
+        <rdfs:comment>testing</rdfs:comment>
+        <rdfs:domain rdf:resource="#PropertyAssociation"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#Context -->
+
+    <owl:Class rdf:about="#Context">
+        <rdfs:label xml:lang="en">Context</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <ns:term_status xml:lang="en"
+            >The Context in wich the Association might be applied.</ns:term_status>
+        <ns:term_status>unstable</ns:term_status>
+    </owl:Class>
+    
+
+
+    <!-- http://www.dcs.shef.ac.uk/~gregoire/ontologies/instead#PropertyAssociation -->
+
+    <owl:Class rdf:about="#PropertyAssociation">
+        <rdfs:label xml:lang="en"
+            >Property Association</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&time;TemporalEntity"/>
+        <ns:term_status>testing</ns:term_status>
+        <rdfs:comment xml:lang="en"
+            >A class defining the association of a class instance with a legacy property.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#Property -->
+
+    <owl:Class rdf:about="&rdf;Property"/>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#Resource -->
+
+    <owl:Class rdf:about="&rdfs;Resource"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- http://www.w3.org/2006/time#TemporalEntity -->
+
+    <owl:Class rdf:about="&time;TemporalEntity"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.974) http://owlapi.sourceforge.net -->
+

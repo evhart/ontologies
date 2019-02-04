@@ -1,0 +1,93 @@
+# Turn off MultiViews
+#Options -MultiViews
+
+# Directive to ensure *.rdf files served as appropriate content type,
+# if not present in main apache config
+AddType application/rdf+xml .rdf
+
+# Rewrite engine setup
+RewriteEngine On
+RewriteBase /ontologies
+
+# Rewrite rule to serve HTML content from the vocabulary URI if requested
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+RewriteRule ^curio$ curio/ [R=303]
+#RewriteRule ^veracity$ veracity/ [R=303]
+
+
+# Rewrite rule to serve HTML content from the vocabulary URI if requested
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+#RewriteRule ^curio$ curio/ [R=303]
+RewriteRule ^veracity$ veracity/ [R=303]
+
+# Rewrite rule to serve HTML content from the vocabulary URI if requested
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+#RewriteRule ^curio$ curio/ [R=303]
+RewriteRule ^instead$ instead/ [R=303]
+
+# Rewrite rule to serve RDF/XML content from the vocabulary URI if requested
+RewriteCond %{HTTP_ACCEPT} application/rdf\+xml
+RewriteRule ^curio$ curio/curio.rdf [R=303]
+RewriteRule ^veracity$ veracity/veracity.rdf [R=303]
+RewriteRule ^instead$ instead/instead.rdf [R=303]
+
+# Choose the default response
+# ---------------------------
+
+# Rewrite rule to serve the RDF/XML content from the vocabulary URI by default
+RewriteRule ^curio$ curio/curio.rdf [R=303]
+RewriteRule ^veracity$ veracity/veracity.rdf [R=303]
+RewriteRule ^instead$ instead/instead.rdf [R=303]
+
+# Rewrite rule to serve HTML content from the vocabulary URI by default (disabled)
+# (To enable this option, uncomment the rewrite rule below, and comment
+# out the rewrite rule directly above)
+RewriteRule ^curio$ curio/ [R=303]
+RewriteRule ^veracity$ veracity/ [R=303]
+RewriteRule ^instead$ instead/ [R=303]
+
+
+################
+AddType application/rdf+xml .rdf
+
+# Rewrite engine setup
+RewriteEngine On
+
+# Rewrite rule to serve HTML content
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+RewriteRule ^eu$ http://www.essepuntato.it/lode/http://socsem.open.ac.uk/ontologies/eu [R=303,L]
+
+# Rewrite rule to serve RDF/XML content if requested
+RewriteCond %{HTTP_ACCEPT} application/rdf\+xml
+RewriteRule ^eu$ eu.owl [R=303]
+
+# Choose the default response
+RewriteRule ^eu$ eu.owl [R=303]
+
+# Rewrite rule to serve HTML content
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
+RewriteCond %{HTTP_ACCEPT} text/html [OR]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/.*
+RewriteRule ^dores$ http://www.essepuntato.it/lode/http://socsem.open.ac.uk/ontologies/dores [R=303,L]
+
+# Rewrite rule to serve RDF/XML content if requested
+RewriteCond %{HTTP_ACCEPT} application/rdf\+xml
+RewriteRule ^dores$ dores.owl [R=303]
+
+# Choose the default response
+RewriteRule ^dores$ dores.owl [R=303]
+
+RedirectMatch 301 /comrades http://socsem.open.ac.uk/ontologies/dores

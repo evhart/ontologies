@@ -1,0 +1,448 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY ns2 "http://rdfs.org/sioc/ns#" >
+    <!ENTITY ns3 "http://commontag.org/ns#" >
+    <!ENTITY terms "http://purl.org/dc/terms/" >
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY gml "http://www.opengis.net/gml/" >
+    <!ENTITY types "http://rdfs.org/sioc/types#" >
+    <!ENTITY access "http://rdfs.org/sioc/access#" >
+    <!ENTITY ns "http://purl.org/net/curio/ns#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY ns4 "http://ggg.milanstankovic.org/opo/ns#" >
+    <!ENTITY annotations "http://purl.org/net/curio/annotations#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://purl.org/net/curio/ns#"
+     xml:base="http://purl.org/net/curio/ns"
+     xmlns:access="http://rdfs.org/sioc/access#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:ns4="http://ggg.milanstankovic.org/opo/ns#"
+     xmlns:types="http://rdfs.org/sioc/types#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:annotations="http://purl.org/net/curio/annotations#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:gml="http://www.opengis.net/gml/"
+     xmlns:ns="http://purl.org/net/curio/ns#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:ns3="http://commontag.org/ns#"
+     xmlns:ns2="http://rdfs.org/sioc/ns#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="">
+        <dc:title xml:lang="en"
+            >CURIO Core Vocabulary</dc:title>
+        <owl:versionInfo xml:lang="en"
+            >First version without OWL restrictions v0.2b</owl:versionInfo>
+        <dc:creator>Gregoire Burel</dc:creator>
+        <owl:imports rdf:resource="http://commontag.org/ns"/>
+        <owl:imports rdf:resource="http://dublincore.org/2008/01/14/dcterms.rdf"/>
+        <owl:imports rdf:resource="http://ggg.milanstankovic.org/opo/ns"/>
+        <owl:imports rdf:resource="http://rdfs.org/sioc/ns"/>
+        <owl:imports rdf:resource="http://rdfs.org/sioc/types"/>
+        <owl:imports rdf:resource="http://www.opengis.net/gml/"/>
+        <owl:imports rdf:resource="http://www.w3.org/2005/Incubator/geo/XGR-geo/W3C_XGR_Geo_files/geo_2007.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&dc;creator"/>
+    <owl:AnnotationProperty rdf:about="&dc;title"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://commontag.org/ns#label -->
+
+    <owl:ObjectProperty rdf:about="&ns3;label">
+        <rdfs:domain rdf:resource="#Tag"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://commontag.org/ns#means -->
+
+    <owl:ObjectProperty rdf:about="&ns3;means">
+        <rdfs:domain rdf:resource="#SemanticTag"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://commontag.org/ns#tagged -->
+
+    <owl:ObjectProperty rdf:about="&ns3;tagged">
+        <rdfs:domain rdf:resource="&annotations;TaggedContent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://commontag.org/ns#taggingDate -->
+
+    <owl:ObjectProperty rdf:about="&ns3;taggingDate">
+        <rdfs:domain rdf:resource="#UserTag"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#has_localization -->
+
+    <owl:ObjectProperty rdf:about="#has_localization">
+        <rdfs:domain rdf:resource="#LocalizedResource"/>
+        <rdfs:range rdf:resource="&gml;_Geometry"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#tag -->
+
+    <owl:ObjectProperty rdf:about="#tag">
+        <rdfs:range rdf:resource="#Tag"/>
+        <rdfs:domain rdf:resource="#UserTag"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#tagging -->
+
+    <owl:ObjectProperty rdf:about="#tagging">
+        <owl:inverseOf rdf:resource="&ns3;tagged"/>
+        <rdfs:range rdf:resource="&annotations;TaggedContent"/>
+        <rdfs:domain rdf:resource="#UserTag"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/sioc/ns#creator_of -->
+
+    <owl:ObjectProperty rdf:about="&ns2;creator_of">
+        <rdfs:range rdf:resource="#AbstractResource"/>
+        <rdfs:range rdf:resource="#UserTag"/>
+        <rdfs:range rdf:resource="&types;Comment"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/created -->
+
+    <owl:DatatypeProperty rdf:about="&terms;created">
+        <rdfs:domain rdf:resource="#AbstractResource"/>
+        <rdfs:domain rdf:resource="#Permission"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/modified -->
+
+    <owl:DatatypeProperty rdf:about="&terms;modified">
+        <rdfs:domain rdf:resource="#Permission"/>
+        <rdfs:domain rdf:resource="&types;Comment"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+    <owl:DatatypeProperty rdf:about="&terms;title">
+        <rdfs:domain rdf:resource="#AbstractResource"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#frequency -->
+
+    <owl:DatatypeProperty rdf:about="#frequency">
+        <rdfs:domain rdf:resource="#Tag"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#mimeType -->
+
+    <owl:DatatypeProperty rdf:about="#mimeType">
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#rate -->
+
+    <owl:DatatypeProperty rdf:about="#rate">
+        <rdfs:domain rdf:resource="#Rating"/>
+        <rdfs:range rdf:resource="&xsd;float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/net/curio/annotations#TaggedContent -->
+
+    <owl:Class rdf:about="&annotations;TaggedContent"/>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#AbstractResource -->
+
+    <owl:Class rdf:about="#AbstractResource">
+        <rdfs:subClassOf rdf:resource="&ns2;Item"/>
+        <rdfs:subClassOf rdf:resource="&foaf;Document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Administrate -->
+
+    <owl:Class rdf:about="#Administrate">
+        <rdfs:subClassOf rdf:resource="#Permission"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Agent -->
+
+    <owl:Class rdf:about="#Agent">
+        <rdfs:subClassOf rdf:resource="&foaf;Agent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#AuthorTag -->
+
+    <owl:Class rdf:about="#AuthorTag">
+        <rdfs:subClassOf rdf:resource="#UserTag"/>
+        <owl:disjointWith rdf:resource="#AutoTag"/>
+        <owl:disjointWith rdf:resource="#ReaderTag"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#AutoTag -->
+
+    <owl:Class rdf:about="#AutoTag">
+        <rdfs:subClassOf rdf:resource="#UserTag"/>
+        <owl:disjointWith rdf:resource="#ReaderTag"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Document -->
+
+    <owl:Class rdf:about="#Document">
+        <rdfs:subClassOf rdf:resource="#Resource"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#LocalizedResource -->
+
+    <owl:Class rdf:about="#LocalizedResource">
+        <rdfs:subClassOf rdf:resource="#Resource"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Moderate -->
+
+    <owl:Class rdf:about="#Moderate">
+        <rdfs:subClassOf rdf:resource="#Permission"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Permission -->
+
+    <owl:Class rdf:about="#Permission">
+        <rdfs:subClassOf rdf:resource="&access;Permission"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Rating -->
+
+    <owl:Class rdf:about="#Rating">
+        <rdfs:subClassOf rdf:resource="&types;Comment"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Read -->
+
+    <owl:Class rdf:about="#Read">
+        <rdfs:subClassOf rdf:resource="#Permission"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#ReaderTag -->
+
+    <owl:Class rdf:about="#ReaderTag">
+        <rdfs:subClassOf rdf:resource="#UserTag"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Resource -->
+
+    <owl:Class rdf:about="#Resource">
+        <rdfs:subClassOf rdf:resource="&annotations;TaggedContent"/>
+        <rdfs:subClassOf rdf:resource="#AbstractResource"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#ResourceFeed -->
+
+    <owl:Class rdf:about="#ResourceFeed">
+        <rdfs:subClassOf rdf:resource="&ns2;Container"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#SemanticTag -->
+
+    <owl:Class rdf:about="#SemanticTag">
+        <rdfs:subClassOf rdf:resource="#Tag"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Tag -->
+
+    <owl:Class rdf:about="#Tag">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#User -->
+
+    <owl:Class rdf:about="#User">
+        <rdfs:subClassOf rdf:resource="&ns2;User"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#UserTag -->
+
+    <owl:Class rdf:about="#UserTag">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Write -->
+
+    <owl:Class rdf:about="#Write">
+        <rdfs:subClassOf rdf:resource="#Permission"/>
+    </owl:Class>
+    
+
+
+    <!-- http://rdfs.org/sioc/access#Permission -->
+
+    <owl:Class rdf:about="&access;Permission"/>
+    
+
+
+    <!-- http://rdfs.org/sioc/ns#Container -->
+
+    <owl:Class rdf:about="&ns2;Container"/>
+    
+
+
+    <!-- http://rdfs.org/sioc/ns#Item -->
+
+    <owl:Class rdf:about="&ns2;Item"/>
+    
+
+
+    <!-- http://rdfs.org/sioc/ns#User -->
+
+    <owl:Class rdf:about="&ns2;User"/>
+    
+
+
+    <!-- http://rdfs.org/sioc/types#Comment -->
+
+    <owl:Class rdf:about="&types;Comment"/>
+    
+
+
+    <!-- http://www.opengis.net/gml/_Geometry -->
+
+    <owl:Class rdf:about="&gml;_Geometry"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Agent -->
+
+    <owl:Class rdf:about="&foaf;Agent"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Document -->
+
+    <owl:Class rdf:about="&foaf;Document"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.974) http://owlapi.sourceforge.net -->
+

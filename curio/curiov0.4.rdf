@@ -1,0 +1,399 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY ns2 "http://rdfs.org/sioc/ns#" >
+    <!ENTITY terms "http://purl.org/dc/terms/" >
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY gml "http://www.opengis.net/gml/" >
+    <!ENTITY types "http://rdfs.org/sioc/types#" >
+    <!ENTITY access "http://rdfs.org/sioc/access#" >
+    <!ENTITY ns "http://purl.org/net/curio/ns#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://purl.org/net/curio/ns#"
+     xml:base="http://purl.org/net/curio/ns"
+     xmlns:access="http://rdfs.org/sioc/access#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:types="http://rdfs.org/sioc/types#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:gml="http://www.opengis.net/gml/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:ns="http://purl.org/net/curio/ns#"
+     xmlns:ns2="http://rdfs.org/sioc/ns#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="">
+        <dc:title xml:lang="en"
+            >CURIO Core Vocabulary</dc:title>
+        <owl:versionInfo xml:lang="en"
+            >First version without OWL restrictions v0.4</owl:versionInfo>
+        <dc:creator>Gregoire Burel</dc:creator>
+        <owl:imports rdf:resource="http://commontag.org/ns"/>
+        <owl:imports rdf:resource="http://dublincore.org/2008/01/14/dcterms.rdf"/>
+        <owl:imports rdf:resource="http://ggg.milanstankovic.org/opo/ns"/>
+        <owl:imports rdf:resource="http://rdfs.org/sioc/access"/>
+        <owl:imports rdf:resource="http://rdfs.org/sioc/ns"/>
+        <owl:imports rdf:resource="http://rdfs.org/sioc/types"/>
+        <owl:imports rdf:resource="http://www.opengis.net/gml/"/>
+        <owl:imports rdf:resource="http://www.w3.org/2005/Incubator/geo/XGR-geo/W3C_XGR_Geo_files/geo_2007.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&dc;creator"/>
+    <owl:AnnotationProperty rdf:about="&dc;title"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <owl:Class rdf:about="&terms;description">
+        <rdf:type rdf:resource="&owl;ObjectProperty"/>
+        <owl:objectPropertyDomain rdf:resource="&terms;description"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/dc/terms/source -->
+
+    <owl:ObjectProperty rdf:about="&terms;source">
+        <rdfs:domain rdf:resource="#Resource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#has_localisation -->
+
+    <owl:ObjectProperty rdf:about="#has_localisation">
+        <rdfs:domain rdf:resource="#LocalisedItem"/>
+        <rdfs:range rdf:resource="&gml;_Geometry"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#has_participant -->
+
+    <owl:ObjectProperty rdf:about="#has_participant">
+        <rdfs:domain rdf:resource="#Participation"/>
+        <rdfs:range rdf:resource="#User"/>
+        <owl:inverseOf rdf:resource="#has_participation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#has_participation -->
+
+    <owl:ObjectProperty rdf:about="#has_participation">
+        <rdfs:range rdf:resource="#Participation"/>
+        <rdfs:domain rdf:resource="#User"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#is_participatingIn -->
+
+    <owl:ObjectProperty rdf:about="#is_participatingIn">
+        <rdfs:range rdf:resource="#Participation"/>
+        <owl:inverseOf rdf:resource="#is_participationOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#is_participationOf -->
+
+    <owl:ObjectProperty rdf:about="#is_participationOf">
+        <rdfs:domain rdf:resource="#Participation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/created -->
+
+    <owl:DatatypeProperty rdf:about="&terms;created">
+        <rdfs:domain rdf:resource="#Permission"/>
+        <rdfs:domain rdf:resource="#Resource"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <owl:DatatypeProperty rdf:about="&terms;description">
+        <owl:dataPropertyDomain rdf:resource="#Document"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/modified -->
+
+    <owl:DatatypeProperty rdf:about="&terms;modified">
+        <rdfs:domain rdf:resource="#Permission"/>
+        <rdfs:domain rdf:resource="&types;Comment"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+    <owl:DatatypeProperty rdf:about="&terms;title">
+        <rdfs:domain rdf:resource="#Resource"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#mimeType -->
+
+    <owl:DatatypeProperty rdf:about="#mimeType">
+        <rdfs:domain rdf:resource="#Document"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#role -->
+
+    <owl:DatatypeProperty rdf:about="#role">
+        <rdfs:domain rdf:resource="#Participation"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <owl:Class rdf:about="&terms;description"/>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Administrate -->
+
+    <owl:Class rdf:about="#Administrate">
+        <rdfs:subClassOf rdf:resource="#Permission"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Agent -->
+
+    <owl:Class rdf:about="#Agent">
+        <rdfs:subClassOf rdf:resource="&foaf;Agent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Container -->
+
+    <owl:Class rdf:about="#Container">
+        <rdfs:subClassOf rdf:resource="#Resource"/>
+        <rdfs:subClassOf rdf:resource="&ns2;Container"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Document -->
+
+    <owl:Class rdf:about="#Document">
+        <rdfs:subClassOf rdf:resource="#Item"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Item -->
+
+    <owl:Class rdf:about="#Item">
+        <rdfs:subClassOf rdf:resource="#Resource"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#ItemFeed -->
+
+    <owl:Class rdf:about="#ItemFeed">
+        <rdfs:subClassOf rdf:resource="&types;SubscriptionList"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#LocalisedItem -->
+
+    <owl:Class rdf:about="#LocalisedItem">
+        <rdfs:subClassOf rdf:resource="#Item"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Moderate -->
+
+    <owl:Class rdf:about="#Moderate">
+        <rdfs:subClassOf rdf:resource="#Permission"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Participation -->
+
+    <owl:Class rdf:about="#Participation">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Permission -->
+
+    <owl:Class rdf:about="#Permission">
+        <rdfs:subClassOf rdf:resource="&access;Permission"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Read -->
+
+    <owl:Class rdf:about="#Read">
+        <rdfs:subClassOf rdf:resource="#Permission"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Resource -->
+
+    <owl:Class rdf:about="#Resource">
+        <rdfs:subClassOf rdf:resource="&foaf;Document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#User -->
+
+    <owl:Class rdf:about="#User">
+        <rdfs:subClassOf rdf:resource="&ns2;User"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#UserUpdate -->
+
+    <owl:Class rdf:about="#UserUpdate">
+        <rdfs:subClassOf rdf:resource="#Item"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/net/curio/ns#Write -->
+
+    <owl:Class rdf:about="#Write">
+        <rdfs:subClassOf rdf:resource="#Permission"/>
+    </owl:Class>
+    
+
+
+    <!-- http://rdfs.org/sioc/access#Permission -->
+
+    <owl:Class rdf:about="&access;Permission"/>
+    
+
+
+    <!-- http://rdfs.org/sioc/ns#Container -->
+
+    <owl:Class rdf:about="&ns2;Container"/>
+    
+
+
+    <!-- http://rdfs.org/sioc/ns#User -->
+
+    <owl:Class rdf:about="&ns2;User"/>
+    
+
+
+    <!-- http://rdfs.org/sioc/types#Comment -->
+
+    <owl:Class rdf:about="&types;Comment"/>
+    
+
+
+    <!-- http://rdfs.org/sioc/types#SubscriptionList -->
+
+    <owl:Class rdf:about="&types;SubscriptionList"/>
+    
+
+
+    <!-- http://www.opengis.net/gml/_Geometry -->
+
+    <owl:Class rdf:about="&gml;_Geometry"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Agent -->
+
+    <owl:Class rdf:about="&foaf;Agent"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Document -->
+
+    <owl:Class rdf:about="&foaf;Document"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.974) http://owlapi.sourceforge.net -->
+

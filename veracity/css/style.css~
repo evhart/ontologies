@@ -1,0 +1,195 @@
+
+body {
+
+ margin-left: 4em;
+ margin-right: 9em;
+ text-align: justify;
+
+}
+
+
+h1, h2, h3, h4, h5{
+	color: #8F7135;
+}
+
+
+h1{
+	background: #fff url(logo_veracity.png) 0 0 no-repeat;
+	padding-top: 170px;
+	
+}
+
+.termdetails {
+}
+
+div.specterm {
+
+    border: 1px solid black;
+  	background: 	#EDE8D4  ;
+	padding: 1em;
+	margin: 0.5em;
+	
+	border: 1px solid #8F7135; 
+}
+
+
+div.rdf-proplist {
+        background-color: #ddf;
+        border: 1px solid black;
+        float: left;
+/*        width: 26%; */
+        margin: 0.3em 1%; 
+
+		border: 1px solid #8F7135; 
+		background-color: #E2DBBA;
+		
+
+		
+}
+img { border: 0 } 
+
+.example {
+        border: 1px solid black;
+        background-color: #D9E3E9; 
+	padding: 5px;
+	width: 100%;
+	
+	border: 1px solid #8F7135; 
+	background-color: #E2DBBA;
+}
+
+ .editorial {
+        border: 2px solid green;
+        padding: 5px;
+}
+
+div.rdf-classlist {
+        background-color: #eef;
+        border: 1px solid black;
+        float: left;
+        margin: 0.3em 1%;
+        width: 26%;
+
+		border: 1px solid #8F7135; 
+		background-color: #E2DBBA;
+		
+		border: 1px solid #8F7135; 
+}
+
+div.rdf-proplist h3 {
+        background-color: #bbf;
+        font-size: 100%;
+        margin: 0;
+        padding: 5px;
+
+		background-color: #BFAF65;
+		color: #353017;
+}
+
+div.rdf-classlist h3 {
+        background-color: #ccf;
+        font-size: 100%;
+        margin: 0;
+        padding: 5px;
+
+		background-color: #BFAF65;
+		color: #353017;
+}
+
+specterm.h3 {
+/*      foreground-color: #000; */
+        /*background-color: #bbf;*/
+        font-size: 100%;
+        margin: 0;
+        padding: 3px;
+
+
+}
+
+
+.azlist { 
+	padding: 5px; 
+	border: 1px solid #8F7135; 
+	background-color: #E2DBBA;
+}
+
+#extra-div1{
+ position: fixed;
+ top: 0;
+ left: 0;
+
+ width: 25px;
+ height: 381px;	
+
+ background: #fff url(side.png) 0 0 no-repeat;
+}
+
+
+/** Image ZOOM **/
+div.jqZoomTitle
+{
+	z-index:5000;
+	text-align:center;
+	font-size:11px;
+	font-family:Tahoma;
+	height:16px;
+	padding-top:2px;
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	color: #FFF;
+	background: #8F7135;
+
+}
+
+.jqZoomPup
+{
+		overflow:hidden;
+		background-color: #8F7135;
+		-moz-opacity:0.6;
+		opacity: 0.6;
+		filter: alpha(opacity = 60);
+		z-index:10;
+		border-color:#8F7135;
+		border-style: solid;
+		cursor:crosshair;
+
+}
+
+.jqZoomPup img
+{
+	border: 0px;
+}
+
+.preload{
+	-moz-opacity:0.8;
+	opacity: 0.8;
+   filter: alpha(opacity = 80);
+	color: #8F7135;
+	font-size: 12px;
+	font-family: Tahoma;
+   text-decoration: none;
+	border: 1px solid #8F7135;
+   background-color: white;
+   padding: 8px;
+	text-align:center;
+   background-image: url(../js/jqzoom/images/zoomloader.gif);
+   background-repeat: no-repeat;
+   background-position: 43px 30px;
+	width:90px;
+	* width:100px;
+	height:43px;
+	*height:55px;
+	z-index:10;
+	position:absolute;
+	top:3px;
+	left:3px;
+
+}
+
+.jqZoomWindow
+{
+	border: 1px solid #8F7135;
+	background-color: #FFF;
+}
